@@ -1,0 +1,7 @@
+[
+{
+  "directory": "/home/tadashi/work/atcoder/build",
+  "command": "/usr/bin/g++-8    -g   -o CMakeFiles/sample.dir/main.cpp.o -c /home/tadashi/work/atcoder/main.cpp",
+  "file": "/home/tadashi/work/atcoder/main.cpp"
+}
+]
