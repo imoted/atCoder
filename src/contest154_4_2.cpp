@@ -1,4 +1,5 @@
 #include <bits/stdc++.h>
+// https://gcc.gnu.org/onlinedocs/gcc-4.6.2/libstdc++/api/a01040_source.html
 using namespace std;
 
 // input
@@ -17,7 +18,7 @@ template<typename First, typename...Rest>void MACRO_VEC_ROW_Scan(int p, First& f
 template<typename T>void MACRO_OUT(const T t) { std::cout << t; }
 template<typename First, typename...Rest>void MACRO_OUT(const First first, const Rest...rest) { std::cout << first << " "; MACRO_OUT(rest...); }
 #define OUT(...) MACRO_OUT(__VA_ARGS__);
-#define FOUT(n, dist) std::cout<<std::fixed<<std::setprecision(n)<<(dist); // std::fixed 浮動小数点の書式 / setprecision 浮動小数点数を出力する精度を設定する。
+#define FOUT(n, dist) std::cout<<std::fixed<<std::setprecision(n)<<(dist);
 #define SOUT(n, c, dist) std::cout<<std::setw(n)<<std::setfill(c)<<(dist);
 #define EOUT(...) { OUT(__VA_ARGS__)BR; exit(0); }
 #define SP std::cout<<" ";
@@ -89,13 +90,30 @@ template<class ARY, class T> void FILL(std::vector<std::vector<ARY>> & a, const 
 signed main() {
 	INIT;
 
-// VAR(string,s,t);
-// VEC(string,v,3);
-// VEC_ROW(string,3,2,3);
-
+	VAR(int, n, k);
+	VEC(int, p, n);
+ 
+	V<double> q(n);
+	REP(i, n) q[i] = (p[i] + 1) / 2.;
+ 
+	V<double> c(n + 1, 0);
+	REP(i, n) c[i + 1] = c[i] + q[i];
+ 
+	double ma = 0;
+	REP(i, n) {
+		if (i + k >= n + 1) break;
+		CHMAX(ma, c[i + k] - c[i]);
+	}
+	FOUT(12, ma)BR;
  return 0;
 }
 
+////////////////////いらないかも ///////////////////////////
+// ll A,B,C,D,E,F,K,G,H,L,M,N,P,Q,R,W,X,Y,Z;
+// double AF,BF,CF,DF,EF;
+// string S,T;
+// vector<ll> AV,BV,CV,DV;
+////////////////////いらないかも ///////////////////////////
 
 // // #define LOCAL
 // #ifdef LOCAL
@@ -116,9 +134,16 @@ signed main() {
 //     V.pb(X);
 //   }
 
+// //   cin >> a >> b; //iostreamは遅いとのこと
+// //   cout << a << b; //iostreamは遅いとのこと
+// //   scanf("%d", &a);
+// //   printf("%d\n", a);
+
 // //   foo = mp(a,b);
 // //   eprintf ("a = %d, b = %d", a, b);
-
+// //   cout << foo.fi;
+// //   cout << foo.se;
+  
 // //   printf("%lld\n", ans);
 
 //     string s, t;

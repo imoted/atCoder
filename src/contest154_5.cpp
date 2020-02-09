@@ -55,10 +55,10 @@ template<class T> inline T CHMIN(T& a, const T b) { return a = (a > b) ? b : a; 
 template<class T> using V = std::vector<T>;
 template<class T> using VV = V<V<T>>;
  
-// template<typename S, typename T>
-// std::ostream& operator<<(std::ostream& os, std::pair<S, T> p) {
-// 	os << "(" << p.first << ", " << p.second << ")"; return os;
-// }
+template<typename S, typename T>
+std::ostream& operator<<(std::ostream& os, std::pair<S, T> p) {
+	os << "(" << p.first << ", " << p.second << ")"; return os;
+}
  
 // type/const
 #define int ll
@@ -86,15 +86,33 @@ template<class ARY, class T> void FILL(std::vector<std::vector<ARY>> & a, const 
 // typedef vector<int> veci;
 // typedef vector<long long> vecl;
  
+	
+ll dp[102][2][5];
+
 signed main() {
 	INIT;
 
-// VAR(string,s,t);
-// VEC(string,v,3);
-// VEC_ROW(string,3,2,3);
+	
+	VAR(string, s);
+	VAR(int,k);
 
- return 0;
+	dp[0][0][0] = 1;
+
+	REP(i,s.size()) REP(j, 2) REP(l, k + 1) {
+			int lim = j ? 9 : (s[i] - '0');
+			REP(d, lim + 1) {
+				dp[i + 1][j || d < lim][l + (d != 0)] += dp[i][j][l];
+			}
+		}
+
+	int ans = 0;
+	REP(j, 2) ans += dp[s.size()][j][k];
+	OUT(ans)BR;
+
+	return 0;
 }
+
+
 
 
 // // #define LOCAL
@@ -116,9 +134,12 @@ signed main() {
 //     V.pb(X);
 //   }
 
+
 // //   foo = mp(a,b);
 // //   eprintf ("a = %d, b = %d", a, b);
-
+// //   cout << foo.fi;
+// //   cout << foo.se;
+  
 // //   printf("%lld\n", ans);
 
 //     string s, t;
