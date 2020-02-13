@@ -89,68 +89,18 @@ template<class ARY, class T> void FILL(std::vector<std::vector<ARY>> & a, const 
 signed main() {
 	INIT;
 
-// VAR(string,s,t);
-// VEC(string,v,3);
-// VEC_ROW(string,3,2,3);
+	VAR(ull,n,k);
+	VEC(ull,h,n);
+	sort(ALL(h));
+	REP(i,k){
+		ll pos = n-1-i;
+		 if(pos >= 0){ 
+			 h[pos] =0;
+			 }
+	}
+	ull acc = accumulate(ALL(h),0LL);
+	OUT(acc);
 
- return 0;
+	return 0;
 }
 
-// 文字列の辞書順比較
-// str <= str2 str > str2 
-// min() max() でもOK
-
-//"a" を b回繰り返すstringで初期化
-// std::string s(b, "a");  
-
-// vector / 配列のsum
-// accumulate(ALL(h),0LL);  // 0LLは long long での加算
-
-// 3項演算子
-// (n == m ? cYES : cNO)
-
-// 配列の重複削除に使うset 配列  insertとかで配列を作り変える？
-//  std::set<int> st{3, 1, 4, 1};
-//  set は重複を許さない順序付集合なので、上記のように重複データがある場合は、重複データは自動的に削除され、{1, 3, 4} だけが格納される。
-
-// CHMAX(a,b)  a,bを比較して、でかい方をaに代入する
-
-// 数値型への変換
-//   string s = "1";
-//  int a = s[0]-'0';
-
-// 数値　→　文字列への変換
-// auto s = std::to_string(i);
-
-// 数値から、文字列に変換、上位の数字と、下位の数字をペアにして、数値に戻す。
-//  auto s = std::to_string(i);
-//  ++map[PAIR(s.front() - '0', s.back() - '0')];
-
-
-
-
-//     s = s + t; //連結
-//     s == t; //比較
-//     s.length(); //長さ
-//     cout << s[0] << '\n';    //i番目の文字を参照
-//     cout << s.substr(0, 5)<< '\n'; //i番目以降k文字を抽出して得られる文字列
-//     cout << s.find("abc")<< '\n';  //sの中に文字列tがあればその先頭のアドレスを返す．なければs.nopsを返却
-//        if (UPos != std::string::npos) { ans_s = A -1; }
-//     cout << s.replace(0, 3, "zxc")<< '\n'; //i番目以降k文字を文字列tで置換する．tを空文字列にすれば削除の動作
-//     cout << s.insert(5, "ins")<< '\n'; //i番目の文字の前に文字列tを挿入
-
-//     vector<int> a{1,2,3,4,5};
-//     cout << a.size()<< '\n'; //aの大きさ
-//     cout << a[3]<< '\n'; //i番目の要素にアクセス
-//     cout << a.front()<< '\n';  //先頭を参照
-//     cout << a.back()<< '\n';   //末尾を参照
-//     a.push_back(10);  //末尾に要素を追加
-//     a.pop_back();   //末尾の要素を削除
-
-
-//     cout << binary_search(a.begin(), a.end(), 20)<< '\n'; //trueかfalseを返す
-//     vector<int>::iterator lit = lower_bound(a.begin(), a.end(), 5);   //x以上の値が初めて現れる位置のイテレータを返す
-//     vector<int>::iterator uit = upper_bound(a.begin(), a.end(), x);   //xより大きい値が初めて現れる位置のイテレータを返す 
-// 	if(lit != a.end() && lit != uit)
-// 		cout << uit - lit << '\n';	// この場合, ult - lit は vc 中の x の個数になる    
-//     // cout << equal_range(a.begin(), a.end(), x)<< '\n';   //上記２カ所のイテレータのペアを返す

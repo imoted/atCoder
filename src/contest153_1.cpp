@@ -89,53 +89,50 @@ template<class ARY, class T> void FILL(std::vector<std::vector<ARY>> & a, const 
 signed main() {
 	INIT;
 
-// VAR(string,s,t);
+VAR(int,h,a);
+if(h%a == 0){OUT(h / a );}
+else{  OUT((h / a) +1);}
 // VEC(string,v,3);
 // VEC_ROW(string,3,2,3);
 
  return 0;
 }
 
-// 文字列の辞書順比較
-// str <= str2 str > str2 
-// min() max() でもOK
 
-//"a" を b回繰り返すstringで初期化
-// std::string s(b, "a");  
+// // #define LOCAL
+// #ifdef LOCAL
+// 	#define eprintf(...) fprintf(stderr, __VA_ARGS__)
 
-// vector / 配列のsum
-// accumulate(ALL(h),0LL);  // 0LLは long long での加算
+// #else
+// 	#define eprintf(...) 42
+// #endif
 
-// 3項演算子
-// (n == m ? cYES : cNO)
+//   int x =10;
+//   int y =5;
+//   swap(x,y);
+//   cout << min(x,y)<< '\n';
+//   cout << max(x,y)<< '\n';
 
-// 配列の重複削除に使うset 配列  insertとかで配列を作り変える？
-//  std::set<int> st{3, 1, 4, 1};
-//  set は重複を許さない順序付集合なので、上記のように重複データがある場合は、重複データは自動的に削除され、{1, 3, 4} だけが格納される。
+//   cin >> N >> K;
+//   REP(i,N){
+//     cin >> X;
+//     V.pb(X);
+//   }
 
-// CHMAX(a,b)  a,bを比較して、でかい方をaに代入する
+// //   foo = mp(a,b);
+// //   eprintf ("a = %d, b = %d", a, b);
 
-// 数値型への変換
-//   string s = "1";
-//  int a = s[0]-'0';
+// //   printf("%lld\n", ans);
 
-// 数値　→　文字列への変換
-// auto s = std::to_string(i);
-
-// 数値から、文字列に変換、上位の数字と、下位の数字をペアにして、数値に戻す。
-//  auto s = std::to_string(i);
-//  ++map[PAIR(s.front() - '0', s.back() - '0')];
-
-
-
-
+//     string s, t;
+//     cin >> s;
+//     cout << s << endl;
 //     s = s + t; //連結
 //     s == t; //比較
 //     s.length(); //長さ
 //     cout << s[0] << '\n';    //i番目の文字を参照
 //     cout << s.substr(0, 5)<< '\n'; //i番目以降k文字を抽出して得られる文字列
 //     cout << s.find("abc")<< '\n';  //sの中に文字列tがあればその先頭のアドレスを返す．なければs.nopsを返却
-//        if (UPos != std::string::npos) { ans_s = A -1; }
 //     cout << s.replace(0, 3, "zxc")<< '\n'; //i番目以降k文字を文字列tで置換する．tを空文字列にすれば削除の動作
 //     cout << s.insert(5, "ins")<< '\n'; //i番目の文字の前に文字列tを挿入
 
@@ -145,9 +142,16 @@ signed main() {
 //     cout << a.front()<< '\n';  //先頭を参照
 //     cout << a.back()<< '\n';   //末尾を参照
 //     a.push_back(10);  //末尾に要素を追加
+//     // cout << a << '\n';
 //     a.pop_back();   //末尾の要素を削除
+//     // cout << a << '\n';
 
-
+//     FOR(i,0,10){
+//         //   vec.push_back(i);
+//         a.pb(i);
+//     }
+//     // reverse(a, a.end());
+//     sort(ALL(a));
 //     cout << binary_search(a.begin(), a.end(), 20)<< '\n'; //trueかfalseを返す
 //     vector<int>::iterator lit = lower_bound(a.begin(), a.end(), 5);   //x以上の値が初めて現れる位置のイテレータを返す
 //     vector<int>::iterator uit = upper_bound(a.begin(), a.end(), x);   //xより大きい値が初めて現れる位置のイテレータを返す 

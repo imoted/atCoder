@@ -11,7 +11,7 @@
             "request": "launch",
             "program": "${workspaceFolder}/src/${fileBasenameNoExtension}",
             "args": [],
-            "stopAtEntry": true,
+            "stopAtEntry": false,
             "cwd": "${workspaceFolder}",
             "environment": [],
             "externalConsole": false,
