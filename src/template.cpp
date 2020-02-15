@@ -127,6 +127,32 @@ signed main() {
 //  ++map[PAIR(s.front() - '0', s.back() - '0')];
 
 
+// int a = 1;
+// int b = 2;
+// swap(a, b); // a = 2, b = 1 // 戻り値は特になし
+
+// vector<ll> v = { 1, 2, 3, 4, 5 };
+// vector<ll> w = { 3,4 };
+// cout << *search(v.begin(), v.end(), w.begin(), w.end()); // v.begin() + 2
+
+// vector<ll> v = { 1, 2, 3 };
+// vector<ll> w = { 1, 2, 3 };
+// cout <<  equal(v.begin(), v.end(), w.begin()); // true
+// w[0] = 2;
+// cout << equal(v.begin(), v.end(), w.begin()); // false
+
+// vector<ll> v = { 1, 2, 1, 3, 2 };
+// cout << count(v.begin(), v.end(), 1); // 2
+
+// vector<int> v = { 1, 2, 3, 4, 5 };
+// vector<int>::iterator itr_b = find(v.begin(), v.end(), 3); // v.begin() + 2
+// cout << *itr_b;
+// vector<int>::iterator itr_e = find(v.begin(), v.end(), 7); // v.end()
+// cout << *itr_e;
+
+
+
+
 
 
 //     s = s + t; //連結
