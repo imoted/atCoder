@@ -93,18 +93,23 @@ signed main() {
 // VEC(string,v,3);
 // VEC_ROW(string,3,2,3);
 
+
+
  return 0;
 }
 
-// 文字列の辞書順比較
-// str <= str2 str > str2 
-// min() max() でもOK
+//////////////////////////  数値、Vectorなど配列に適用 ///////////////////////////
+
+//     vector<int> a{1,2,3,4,5};
+//     cout << a.size()<< '\n'; //aの大きさ
+//     cout << a[3]<< '\n'; //i番目の要素にアクセス
+//     cout << a.front()<< '\n';  //先頭を参照
+//     cout << a.back()<< '\n';   //末尾を参照
+//     a.push_back(10);  //末尾に要素を追加
+//     a.pop_back();   //末尾の要素を削除
 
 //"a" を b回繰り返すstringで初期化
 // std::string s(b, "a");  
-
-// vector / 配列のsum
-// accumulate(ALL(h),0LL);  // 0LLは long long での加算
 
 // 3項演算子
 // (n == m ? cYES : cNO)
@@ -119,41 +124,132 @@ signed main() {
 //   string s = "1";
 //  int a = s[0]-'0';
 
-// 数値　→　文字列への変換
-// auto s = std::to_string(i);
-
-// 数値から、文字列に変換、上位の数字と、下位の数字をペアにして、数値に戻す。
-//  auto s = std::to_string(i);
-//  ++map[PAIR(s.front() - '0', s.back() - '0')];
-
-
+// ２つの変数をスワップ
 // int a = 1;
 // int b = 2;
 // swap(a, b); // a = 2, b = 1 // 戻り値は特になし
 
+// 配列から配列を検索
 // vector<ll> v = { 1, 2, 3, 4, 5 };
 // vector<ll> w = { 3,4 };
 // cout << *search(v.begin(), v.end(), w.begin(), w.end()); // v.begin() + 2
 
-// vector<ll> v = { 1, 2, 3 };
-// vector<ll> w = { 1, 2, 3 };
-// cout <<  equal(v.begin(), v.end(), w.begin()); // true
-// w[0] = 2;
-// cout << equal(v.begin(), v.end(), w.begin()); // false
-
-// vector<ll> v = { 1, 2, 1, 3, 2 };
-// cout << count(v.begin(), v.end(), 1); // 2
-
+//  配列から 要素を検索
 // vector<int> v = { 1, 2, 3, 4, 5 };
 // vector<int>::iterator itr_b = find(v.begin(), v.end(), 3); // v.begin() + 2
 // cout << *itr_b;
 // vector<int>::iterator itr_e = find(v.begin(), v.end(), 7); // v.end()
 // cout << *itr_e;
 
+// 同等かどうか、を判定 boolを返す
+// vector<ll> v = { 1, 2, 3 };a
+// vector<ll> w = { 1, 2, 3 };
+// cout <<  equal(v.begin(), v.end(), w.begin()); // true
+// w[0] = 2;
+// cout << equal(v.begin(), v.end(), w.begin()); // false
 
+// 配列の中から数を数える
+// vector<ll> v = { 1, 2, 1, 3, 2 };
+// cout << count(v.begin(), v.end(), 1); // 2
 
+// 配列の要素を入れ替える
+// V<ll> v = { 1, 2, 3, 2, 1 };
+// replace(v.begin(), v.end(), 2, 4); // v = { 1, 4, 3, 4, 1 }
 
+// 配列から要素を消す  removeだけでは、ゴミがついてくるので、eraseを行う。
+// V<ll> v = { 1, 2, 3, 2, 1 };
+// V<ll> w = { 1, 2, 3, 2, 1 };
+// remove(v.begin(), v.end(), 2);                   // v = { 1, 3, 1, ? , ? }
+// remove(w.begin(), w.end(), 2), w.end(); // w = { 1,3,1}
+// w.erase(remove(w.begin(), w.end(), 2), w.end()); // w = { 1,3,1}
 
+// 連続した同じ値を消す。removeと同様新しい末尾位置を示すイテレータが返ってくる。
+// 重複を無視して数え上げるときに、多くの場合setを使うよりもvectorにpush_backしていき、sortしてuniqueしたほうが速い(g++で確認)。
+// V<ll> v = { 1, 1, 2, 2, 3, 3 };
+// v.erase(unique(v.begin(), v.end()), v.end()); // v = { 1, 2, 3 }
+
+// 逆順に並べ替える。
+// 単純に逆にしたい時はもちろん、シーケンスを逆にたどるときにreverseをしておくとインデキシングが楽になるのでたまに使う。
+// V<ll> v = { 1, 2, 3, 4, 5 };
+// reverse(v.begin(), v.end()); // v = { 5, 4, 3, 2, 1 }
+
+// シーケンスをシフトする。引数がなかなか難しいが、第2引数は操作後に新しく先頭になっている要素のイテレータ。
+// V<ll> v = { 1, 2, 3, 4, 5 };
+// rotate(v.begin(), v.begin() + 2, v.end()); // v = { 3, 4, 5, 1,2 }
+
+// ランダムにシャッフルする。
+// 乱択したい時や、特定の順番の入力に対して弱いアルゴリズムを使う時に入力をシャッフルしておくなどの使い方がある。
+// V<ll> v = { 1, 2, 3, 4, 5 };
+// random_shuffle(v.begin(), v.end()); // v = { 3, 5, 2, 4, 1 } (例えばこうなる)
+
+// sort / 逆順ソートも
+// V<ll> v = { 3, 5, 2, 4, 1 };
+// V<ll> w = { 3, 5, 2, 4, 1 };
+// sort(v.begin(), v.end());   // v = { 1, 2, 3, 4, 5 }
+// sort(w.rbegin(), w.rend()); // w = { 5, 4, 3, 2, 1 } (greaterを使うより楽！)
+
+// ソート済みのシーケンスに対して、ある値を入れるときに、最も早い/遅い位置の直後のイテレータを返す。
+// 勝手に二分探索してくれるので便利。
+// V<ll> v = { 1, 2, 2, 3, 3 };
+// cout << *lower_bound(v.begin(), v.end(), 2); // v.begin() + 1
+// cout << *upper_bound(v.begin(), v.end(), 2); // v.begin() + 3
+
+// ソート済みのシーケンスに対して、ある値が存在するかを調べる。
+// 他の操作が必要ない場合はsetを使うことで簡単にかけるので使う頻度は少ないかもしれない。
+// V<ll> v = { 1, 2, 2, 3, 3 };
+// cout << binary_search(v.begin(), v.end(), 2); // true
+// cout << binary_search(v.begin(), v.end(), 4); // false
+
+// シーケンス中の最大値/最小値「のイテレータ」を返す。
+// 単純に最大値/最小値が欲しい時のほか、そのインデックスまで分かるため、非常に便利。
+// V<ll> v = { 3, 5, 2, 4, 1 };
+// cout << *max_element(v.begin(), v.end()); // 5
+// cout << max_element(v.begin(), v.end()) - v.begin(); // 1 (5のインデックス)
+
+// 辞書順で次の/前のものに並び替える。返り値は、次の/前のものがない場合にfalse、それ以外はtrueになる。
+// 自分で作るとかなりめんどくさいし、非常に便利。
+// 全順列を試す場合、再帰するよりもだいたい速い(ただし、枝刈りは難しくなる)。
+// 99%くらい以下のdo〜whileの形で使う。
+// V<ll> v = { 1, 2, 3 };
+// V<ll> w = { 1, 2, 3 };
+// ll dummy;
+// do{
+//   // v は ループごとに
+//   //  { 1, 2, 3 }, { 1, 3, 2 }, 
+//   //  { 2, 1, 3 }, { 2, 3, 1 },
+//   //  { 3, 1, 2 }, { 3, 2, 1 }
+//   // になっている。
+//   dummy = 1;
+// }while(next_permutation(v.begin(), v.end()));
+// // ループ後は v = { 1, 2, 3 }
+
+// // 組み合わせを全部試したいときにも使える
+// // 3個中2個を選びたい場合は
+// // w = { 0, 1, 1 } としておき以下のように出来る。
+// do{
+//   // w[i] = 1 ならば i 番目のものを選んでいる状態
+//   // w[i] = 0 ならば i 番目のものは選んでいない状態
+//   dummy = 1;  
+// }while(next_permutation(w.begin(), w.end()));
+
+// 総和を簡単に求められる。
+// 初期値の型によって結果の型を決めることが出来るのが地味に便利。
+// V<ll> v = { 1, 2, 3, 4, 5 };
+// V<string> w = { "Competitive", "Programming", "Advent", "Calendar" };
+// cout << accumulate(v.begin(), v.end(), 0);   // 15、結果はint
+// cout << accumulate(v.begin(), v.end(), 0ll); // 15、結果はlong long
+// cout << accumulate(v.begin(), v.end(), 1, multiplies<int>()); // 120、結果はint
+// cout << accumulate(w.begin(), w.end(), string()); // "CompetitiveProgrammingAdventCalendar"
+
+// 途中までの和を全部求められる
+// この結果を利用してO(1)で部分和を求めることが出来ることなどから利用する場面がありそう
+// V<ll> v = { 1, 2, 3, 4, 5 };
+// V<ll> w = { 1, 2, 3, 4, 5 };
+// // w.size() >= 5 じゃないとダメ
+// partial_sum(v.begin(), v.end(), w.begin()); // w = { 1, 3, 6, 10, 15 }
+// partial_sum(v.begin(), v.end(), v.begin()); // vに上書きもできる v 
+
+////////////////////////////////   文字列に対して適用   //////////////////////////
 
 //     s = s + t; //連結
 //     s == t; //比較
@@ -165,18 +261,13 @@ signed main() {
 //     cout << s.replace(0, 3, "zxc")<< '\n'; //i番目以降k文字を文字列tで置換する．tを空文字列にすれば削除の動作
 //     cout << s.insert(5, "ins")<< '\n'; //i番目の文字の前に文字列tを挿入
 
-//     vector<int> a{1,2,3,4,5};
-//     cout << a.size()<< '\n'; //aの大きさ
-//     cout << a[3]<< '\n'; //i番目の要素にアクセス
-//     cout << a.front()<< '\n';  //先頭を参照
-//     cout << a.back()<< '\n';   //末尾を参照
-//     a.push_back(10);  //末尾に要素を追加
-//     a.pop_back();   //末尾の要素を削除
+// 文字列の辞書順比較
+// str <= str2 str > str2 
+// min() max() でもOK
 
+// 数値　→　文字列への変換
+// auto s = std::to_string(i);
 
-//     cout << binary_search(a.begin(), a.end(), 20)<< '\n'; //trueかfalseを返す
-//     vector<int>::iterator lit = lower_bound(a.begin(), a.end(), 5);   //x以上の値が初めて現れる位置のイテレータを返す
-//     vector<int>::iterator uit = upper_bound(a.begin(), a.end(), x);   //xより大きい値が初めて現れる位置のイテレータを返す 
-// 	if(lit != a.end() && lit != uit)
-// 		cout << uit - lit << '\n';	// この場合, ult - lit は vc 中の x の個数になる    
-//     // cout << equal_range(a.begin(), a.end(), x)<< '\n';   //上記２カ所のイテレータのペアを返す
+// 数値から、文字列に変換、上位の数字と、下位の数字をペアにして、数値に戻す。
+//  auto s = std::to_string(i);
+//  ++map[PAIR(s.front() - '0', s.back() - '0')];
