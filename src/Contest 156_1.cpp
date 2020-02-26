@@ -80,90 +80,19 @@ template<class T> void FILL(std::vector<T> & a, const T & val) { for (auto& x : 
 template<class ARY, class T> void FILL(std::vector<std::vector<ARY>> & a, const T & val) { for (auto& b : a) FILL(b, val); }
 // ------------>8------------------------------------->8------------
 
-template<int mod>
-struct ModInt{
-	int x;
-	ModInt():x(0){}
-	ModInt(long long y):x(y>=0?y%mod:(mod-(-y)%mod)%mod){}
-	ModInt &operator+=(const ModInt &p){
-		if((x+=p.x)>=mod)x-=mod;
-		return *this;
-	}
-	ModInt &operator-=(const ModInt &p){
-		if((x+=mod-p.x)>=mod)x-=mod;
-		return *this;
-	}
-	ModInt &operator*=(const ModInt &p){
-		x=(int)(1LL*x*p.x%mod);
-		return *this;
-	}
-	ModInt &operator/=(const ModInt &p){
-		*this*=p.inverse();
-		return *this;
-	}
-	ModInt &operator^=(long long p){
-		ModInt res = 1;
-		for (; p; p >>= 1) {
-			if (p & 1) res *= *this;
-			*this *= *this;
-		}
-		return *this = res;
-	}
-	ModInt operator-()const{return ModInt(-x);}
-	ModInt operator+(const ModInt &p)const{return ModInt(*this)+=p;}
-	ModInt operator-(const ModInt &p)const{return ModInt(*this)-=p;}
-	ModInt operator*(const ModInt &p)const{return ModInt(*this)*=p;}
-	ModInt operator/(const ModInt &p)const{return ModInt(*this)/=p;}
-	ModInt operator^(long long p)const{return ModInt(*this)^=p;}
-	bool operator==(const ModInt &p)const{return x==p.x;}
-	bool operator!=(const ModInt &p)const{return x!=p.x;}
-	explicit operator int() const { return x; }						   // added by QCFium
-	ModInt operator=(const int p) {x = p; return ModInt(*this);} // added by QCFium
-	ModInt inverse()const{
-		int a=x,b=mod,u=1,v=0,t;
-		while(b>0){
-			t=a/b;
-			a-=t*b;
-			std::swap(a,b);
-			u-=t*v;
-			std::swap(u,v);
-		}
-		return ModInt(u);
-	}
-	friend std::ostream &operator<<(std::ostream &os,const ModInt<mod> &p){
-		return os<<p.x;
-	}
-	friend std::istream &operator>>(std::istream &is,ModInt<mod> &a){
-		long long x;
-		is>>x;
-		a=ModInt<mod>(x);
-		return (is);
-	}
-};
-typedef ModInt<MOD> mint;
-
 // typedef pair<int, int> pii;
 // typedef pair<ll, int> pli;
 // typedef pair<ll, ll> pll;
 // typedef vector<int> veci;
 // typedef vector<long long> vecl;
  
-mint combination(ull s, ull r) {
-  if ( r * 2 > s ) r = s - r;
-  mint dividend = 1;
-  mint divisor  = 1;
-  for ( ull i = 1; i <= r; ++i ) {
-    dividend *= (s-i+1);
-    divisor  *= i;
-  }
-  return dividend / divisor;
-}
-
-
 signed main() {
 	INIT;
 
-// VAR(string,s,t);
+VAR(ll,n,r);
+if (n >= 10) {OUT(r); }
+else {OUT(r+ (100 * (10-n)));}
+
 // VEC(string,v,3);
 // VEC_ROW(string,3,2,3);
 
@@ -322,23 +251,6 @@ signed main() {
 // // w.size() >= 5 じゃないとダメ
 // partial_sum(v.begin(), v.end(), w.begin()); // w = { 1, 3, 6, 10, 15 }
 // partial_sum(v.begin(), v.end(), v.begin()); // vに上書きもできる v 
-
-// nCkのコンビネーションの一覧を出してくれる　関数
-// vのvectorに、kを変えた時の一覧が配列で出力される。
-// void comb(vector<vector<ull> > &v){
-//   for(int i = 0;i <v.size(); i++){
-//     v[i][0]=1;
-//     v[i][i]=1;
-//   }
-//   for(int k = 1;k <v.size();k++){
-//     for(int j = 1;j<k;j++){
-//       v[k][j]=(v[k-1][j-1]+v[k-1][j]);
-//     }
-//   }
-// }
-
-// vector<vector<ull> > v(n+1,vector<ull>(n+1,0));
-// comb(v);
 
 ////////////////////////////////   文字列に対して適用   //////////////////////////
 

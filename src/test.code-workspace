@@ -1,0 +1,16 @@
+{
+	"folders": [
+		{
+			"path": "/home/tadashi/work/atcoder"
+		}
+	],
+	"settings": {
+		"python.autoComplete.extraPaths": [
+			"/home/tadashi/ros/devel/lib/python2.7/dist-packages",
+			"/opt/ros/kinetic/lib/python2.7/dist-packages"
+		],
+		"files.associations": {
+			"ostream": "cpp"
+		}
+	}
+}

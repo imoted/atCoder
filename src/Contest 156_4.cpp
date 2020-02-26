@@ -78,7 +78,6 @@ template<class T, size_t N> void FILL(T(&a)[N], const T & val) { for (auto& x : 
 template<class ARY, size_t N, size_t M, class T> void FILL(ARY(&a)[N][M], const T & val) { for (auto& b : a) FILL(b, val); }
 template<class T> void FILL(std::vector<T> & a, const T & val) { for (auto& x : a) x = val; }
 template<class ARY, class T> void FILL(std::vector<std::vector<ARY>> & a, const T & val) { for (auto& b : a) FILL(b, val); }
-// ------------>8------------------------------------->8------------
 
 template<int mod>
 struct ModInt{
@@ -142,12 +141,15 @@ struct ModInt{
 };
 typedef ModInt<MOD> mint;
 
+// ------------>8------------------------------------->8------------
+
 // typedef pair<int, int> pii;
 // typedef pair<ll, int> pli;
 // typedef pair<ll, ll> pll;
 // typedef vector<int> veci;
 // typedef vector<long long> vecl;
  
+
 mint combination(ull s, ull r) {
   if ( r * 2 > s ) r = s - r;
   mint dividend = 1;
@@ -163,11 +165,17 @@ mint combination(ull s, ull r) {
 signed main() {
 	INIT;
 
-// VAR(string,s,t);
-// VEC(string,v,3);
-// VEC_ROW(string,3,2,3);
+VAR(ll,n,a,b);
+mint ans =0;
+// mint outa = combination(n,a);
+// mint outb = combination(n,b);
+// ull acc = 1;
+// REP(i,n) acc *= 2 % MOD;
 
+ ans = (mint(2) ^ n) -1 - combination(n,a)- combination(n,b);
 
+// ans = ans % (pow(10,9)+7);
+ OUT(ans.x);
 
  return 0;
 }
@@ -322,23 +330,6 @@ signed main() {
 // // w.size() >= 5 じゃないとダメ
 // partial_sum(v.begin(), v.end(), w.begin()); // w = { 1, 3, 6, 10, 15 }
 // partial_sum(v.begin(), v.end(), v.begin()); // vに上書きもできる v 
-
-// nCkのコンビネーションの一覧を出してくれる　関数
-// vのvectorに、kを変えた時の一覧が配列で出力される。
-// void comb(vector<vector<ull> > &v){
-//   for(int i = 0;i <v.size(); i++){
-//     v[i][0]=1;
-//     v[i][i]=1;
-//   }
-//   for(int k = 1;k <v.size();k++){
-//     for(int j = 1;j<k;j++){
-//       v[k][j]=(v[k-1][j-1]+v[k-1][j]);
-//     }
-//   }
-// }
-
-// vector<vector<ull> > v(n+1,vector<ull>(n+1,0));
-// comb(v);
 
 ////////////////////////////////   文字列に対して適用   //////////////////////////
 
