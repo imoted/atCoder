@@ -27,7 +27,8 @@ template<typename First, typename...Rest>void MACRO_OUT(const First first, const
 #define ENDL std::cout<<std::endl;
 #define FLUSH std::cout<<std::flush;
 #define SHOW(dist) {std::cerr << #dist << "\t: " << (dist) << "\n";}
-#define SHOWVECTOR(v) {std::cerr << #v << "\t: ";for(const auto& xxx : v){std::cerr << xxx << " ";}std::cerr << "\n";}
+// #define SHOWVECTOR(v) {std::cerr << #v << "\t: ";for(const auto& xxx : v){std::cerr << xxx << " ";}std::cerr << "\n";}
+#define SHOWVECTOR(v) {std::cerr ;for(const auto& xxx : v){std::cerr << xxx << " ";}}
 #define SHOWVECTOR2(v) {std::cerr << #v << "\t:\n";for(const auto& xxx : v){for(const auto& yyy : xxx){std::cerr << yyy << " ";}std::cerr << "\n";}}
 #define SHOWQUEUE(a) {auto tmp(a);std::cerr << #a << "\t: ";while(!tmp.empty()){std::cerr << tmp.front() << " ";tmp.pop();}std::cerr << "\n";}
 #define SHOWSTACK(a) {auto tmp(a);std::cerr << #a << "\t: ";while(!tmp.empty()){std::cerr << tmp.top() << " ";tmp.pop();}std::cerr << "\n";}
@@ -51,7 +52,6 @@ template<class T> inline T CHMIN(T& a, const T b) { return a = (a > b) ? b : a; 
 #define FI first
 #define SE second
 
-// test
 template<class T> using V = std::vector<T>;
 template<class T> using VV = V<V<T>>;
  
@@ -159,16 +159,84 @@ mint combination(ull s, ull r) {
   return dividend / divisor;
 }
 
+V<ll> dice(6);
+
+void fill(ull x,ull i){
+	if(i== 0)dice[5] = x;	
+	if(i== 1)dice[4] = x;
+	if(i== 2)dice[3] = x;
+	if(i== 3)dice[2] = x;
+	if(i== 4)dice[1] = x;
+	if(i== 5)dice[0] = x;
+
+}
 
 signed main() {
 	INIT;
+ll distance =0;
+ll score =0;
 
-// VAR(string,s,t);
-// VEC(string,v,3);
-// VEC_ROW(string,3,2,3);
+VAR(ll,n,m);
+V<ll> v_list(n);
+ll remaining;
+dice = {1,2,3,4,5,6};
+ll cnt =0;
+ll cnt2 =0;
+ll last_remaining =0;
+bool flag_near_goal = 0;
 
+	REP(i,m){
 
+		// fill(6,i);
 
+		REP(j,6) {
+			OUT(dice[j])
+			if(j != 5)OUT(" ")
+		}
+		ENDL
+		VAR(ll,d,v,x)
+
+		remaining = n - x;
+		if (remaining <= 6){
+			flag_near_goal = true;
+			cnt2 =0;
+			if(last_remaining != remaining){
+				cnt =0;
+			}
+		}
+		else{
+			flag_near_goal = false;
+			cnt =0;
+			if(cnt2 <6){
+				dice[cnt2] =6;
+				cnt2 ++;
+			}
+			else{cnt2 =0;}
+		}
+		if (flag_near_goal == true && cnt < 6){
+			// if( remaining % 5 == 0 ){
+			// 	dice[cnt] = 5;
+			// 	cnt ++;
+			// }
+			// else if( remaining % 4 == 0 ){
+			// 	dice[cnt] = 4;
+			// 	cnt ++;		
+			// } 
+			// else if( remaining % 3 == 0 ){
+			// 	dice[cnt] = 3;
+			// 	cnt ++;		
+			// } 
+			// else 
+			if( remaining % 2 == 0 ){
+				dice[cnt] = 2;
+				cnt ++;		
+			} else {
+				dice[cnt] = 1;
+				cnt ++;
+			}
+		}
+		last_remaining = remaining;
+	}
  return 0;
 }
 
@@ -242,7 +310,6 @@ signed main() {
 // V<ll> v = { 1, 1, 2, 2, 3, 3 };
 // v.erase(unique(v.begin(), v.end()), v.end()); // v = { 1, 2, 3 }
 
-// めちゃ遅い　要注意
 // 逆順に並べ替える。
 // 単純に逆にしたい時はもちろん、シーケンスを逆にたどるときにreverseをしておくとインデキシングが楽になるのでたまに使う。
 // V<ll> v = { 1, 2, 3, 4, 5 };
@@ -351,8 +418,6 @@ signed main() {
 //     cout << s.find("abc")<< '\n';  //sの中に文字列tがあればその先頭のアドレスを返す．なければs.nopsを返却
 //        if (UPos != std::string::npos) { ans_s = A -1; }
 //     cout << s.replace(0, 3, "zxc")<< '\n'; //i番目以降k文字を文字列tで置換する．tを空文字列にすれば削除の動作
-
-// めちゃ遅い　要注意
 //     cout << s.insert(5, "ins")<< '\n'; //i番目の文字の前に文字列tを挿入
 
 // 文字列の辞書順比較
@@ -365,7 +430,3 @@ signed main() {
 // 数値から、文字列に変換、上位の数字と、下位の数字をペアにして、数値に戻す。
 //  auto s = std::to_string(i);
 //  ++map[PAIR(s.front() - '0', s.back() - '0')];
-
-// めちゃ遅い　要注意
-// 文字列を逆に並べる 引数はイテレータ
-//reverse(s.begin() ,s.end());

@@ -163,11 +163,12 @@ mint combination(ull s, ull r) {
 signed main() {
 	INIT;
 
-// VAR(string,s,t);
+VAR(string,s);
 // VEC(string,v,3);
 // VEC_ROW(string,3,2,3);
 
-
+if(s[0] == s[1] && s[1] == s[2]) cNo;
+else cYes;
 
  return 0;
 }
@@ -242,7 +243,6 @@ signed main() {
 // V<ll> v = { 1, 1, 2, 2, 3, 3 };
 // v.erase(unique(v.begin(), v.end()), v.end()); // v = { 1, 2, 3 }
 
-// めちゃ遅い　要注意
 // 逆順に並べ替える。
 // 単純に逆にしたい時はもちろん、シーケンスを逆にたどるときにreverseをしておくとインデキシングが楽になるのでたまに使う。
 // V<ll> v = { 1, 2, 3, 4, 5 };
@@ -351,8 +351,6 @@ signed main() {
 //     cout << s.find("abc")<< '\n';  //sの中に文字列tがあればその先頭のアドレスを返す．なければs.nopsを返却
 //        if (UPos != std::string::npos) { ans_s = A -1; }
 //     cout << s.replace(0, 3, "zxc")<< '\n'; //i番目以降k文字を文字列tで置換する．tを空文字列にすれば削除の動作
-
-// めちゃ遅い　要注意
 //     cout << s.insert(5, "ins")<< '\n'; //i番目の文字の前に文字列tを挿入
 
 // 文字列の辞書順比較
@@ -365,7 +363,3 @@ signed main() {
 // 数値から、文字列に変換、上位の数字と、下位の数字をペアにして、数値に戻す。
 //  auto s = std::to_string(i);
 //  ++map[PAIR(s.front() - '0', s.back() - '0')];
-
-// めちゃ遅い　要注意
-// 文字列を逆に並べる 引数はイテレータ
-//reverse(s.begin() ,s.end());

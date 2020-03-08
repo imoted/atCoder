@@ -163,8 +163,49 @@ mint combination(ull s, ull r) {
 signed main() {
 	INIT;
 
-// VAR(string,s,t);
-// VEC(string,v,3);
+VAR(string,s);
+VAR(ll,q);
+ll t=0;
+char c;
+ll f=0;
+ll rev=0;
+deque<char> deq;
+string ans;
+
+REP(i,s.size()){
+	deq.push_back(s[i]);
+}
+
+REP(i,q){
+	cin >> t;
+	if(t ==1){
+		//swapにしても、reverseにしても毎回やるのは遅すぎる
+		// swap(s.front() ,s.back() );
+		// for (ll j = 0; j < s.length() / 2; j++) {
+		// 	// char temp = ;
+		// 	swap(s[j],s[s.length()-j-1]);
+	    // }
+		// reverse(s.begin() ,s.end());
+
+		rev = !rev;
+	}
+	else{
+		cin >> f >> c;
+		if(f ==1 && !rev || f ==2 && rev ){
+		// if(rev ^ (f ==1) ){
+			// s.insert(0, c);
+			deq.push_front(c);
+		}
+		else{
+			deq.PB(c);
+			// s.insert(s.length(), c);
+		}
+	}
+}
+for(auto tmp : deq) ans.push_back(tmp);
+if(rev) reverse(ans.begin(), ans.end());
+OUT(ans)
+
 // VEC_ROW(string,3,2,3);
 
 
@@ -242,7 +283,6 @@ signed main() {
 // V<ll> v = { 1, 1, 2, 2, 3, 3 };
 // v.erase(unique(v.begin(), v.end()), v.end()); // v = { 1, 2, 3 }
 
-// めちゃ遅い　要注意
 // 逆順に並べ替える。
 // 単純に逆にしたい時はもちろん、シーケンスを逆にたどるときにreverseをしておくとインデキシングが楽になるのでたまに使う。
 // V<ll> v = { 1, 2, 3, 4, 5 };
@@ -365,7 +405,3 @@ signed main() {
 // 数値から、文字列に変換、上位の数字と、下位の数字をペアにして、数値に戻す。
 //  auto s = std::to_string(i);
 //  ++map[PAIR(s.front() - '0', s.back() - '0')];
-
-// めちゃ遅い　要注意
-// 文字列を逆に並べる 引数はイテレータ
-//reverse(s.begin() ,s.end());

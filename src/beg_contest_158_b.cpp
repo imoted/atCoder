@@ -163,13 +163,30 @@ mint combination(ull s, ull r) {
 signed main() {
 	INIT;
 
-VAR(ll,n,m,k);
-MAT(ll,ab,2,m);
-MAT(ll,cd,2,m);
+VAR(ll,n,a,b);
+// VEC(string,v,3);
+// VEC_ROW(string,3,2,3);
 
+ll ans =0;
 
+// ll i=0;
+// while( i < n){
+// 	if(n < (i+a) ){
+// 		ans += n - i;
+// 		OUT(ans)
+// 		return 0;
+// 	}
+// 	else ans += a;
+// 	i += (a +b);
+// }
+// OUT(ans)
 
- return 0;
+ans = n / (a+b) *a;
+if(n % (a+b) <= a) ans += (n % (a+b));
+else if(n % (a+b) > a) ans += a;
+OUT(ans)
+
+return 0;
 }
 
 //////////////////////////  数値、Vectorなど配列に適用 ///////////////////////////
