@@ -160,14 +160,63 @@ mint combination(ull s, ull r) {
 }
 
 
+bool isPuttable(ll y, ll x, V<V<char>>& board){
+	FOR(dx,-1,2){
+		FOR(dy,-1,2){
+			if(dx ==0 && dy ==0) continue;
+			ll ty=y;
+			ll tx=x;
+			while(true){
+				ty += dy;
+				tx += dx;
+				if(!( ty >=0 && tx >= 0 && ty <8 && tx <8)) break;
+				if(board[ty][tx] == 'Q') return false;
+			}
+		}
+	}
+	return true;
+}
+
+ll dfs(ll pos, ll nokori, V<V<char>>& board){
+	if(nokori ==0)	return true;
+	if(pos ==64)	return false;
+	ll y = pos / 8;
+	ll x = pos % 8;
+	if(board[x][y] =='Q'){
+		if(isPuttable(y,x,board))
+			if(dfs(pos +1,nokori -1, board))  return true;
+	}
+	else{
+		if(isPuttable(y,x,board)){
+			board[y][x] = 'Q';
+			if(dfs(pos +1,nokori -1, board))  return true;
+			board[y][x] = '.';
+		}
+		if(dfs(pos +1,nokori, board))  return true;
+	}
+	return false;
+}
+
+
 signed main() {
 	INIT;
+	
+ // http://arc001.contest.atcoder.jp/tasks/arc001_3
+ // 8*8
 
-// VAR(string,s,t);
-// VEC(string,v,3);
-// VEC_ROW(string,3,2,3);
+ MAT(char, c, 8, 8)
+//  OUT(c[2][7])
 
-
+ if(dfs(0,8,c)){
+	REP(x,8){ //y
+	 	REP(y,8){ //x
+			 OUT(c[x][y]);
+		}
+		BR
+	}
+ }
+ else OUT("No Answer")
+ 
  return 0;
 }
 

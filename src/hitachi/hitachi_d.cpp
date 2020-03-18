@@ -163,10 +163,30 @@ mint combination(ull s, ull r) {
 signed main() {
 	INIT;
 
-// VAR(string,s,t);
-// VEC(string,v,3);
-// VEC_ROW(string,3,2,3);
-
+VAR(ll,n,t);
+V<ll> a(n);
+V<ll> b(n);
+REP(i,n) cin >> a[i] >> b[i];
+ll cu_t=t;
+ll tmp =pow(10,9);
+ll target_i =0;
+ll ans =0;
+while(cu_t > 0 ){
+	REP(i,n){
+		if(tmp > a[i] * (cu_t - b[i]) + b[i] ){
+			tmp = a[i] * cu_t + b[i];
+			target_i =i;
+		}
+	}
+	
+	// target_i ; // 買ったお店のIndex
+	cu_t -= tmp + 1;
+	ans++;
+	tmp =pow(10,9);
+	target_i =0;
+}
+ans--;
+OUT(ans)
 
  return 0;
 }
@@ -215,7 +235,7 @@ signed main() {
 // cout << *itr_e;
 
 // 同等かどうか、を判定 boolを返す
-// vector<ll> v = { 1, 2, 3 };a
+// vector<ll> v = { 1, 2, 3 };
 // vector<ll> w = { 1, 2, 3 };
 // cout <<  equal(v.begin(), v.end(), w.begin()); // true
 // w[0] = 2;
@@ -285,14 +305,13 @@ signed main() {
 // 全順列を試す場合、再帰するよりもだいたい速い(ただし、枝刈りは難しくなる)。
 // 99%くらい以下のdo〜whileの形で使う。
 // V<ll> v = { 1, 2, 3 };
+// V<ll> w = { 1, 2, 3 };
+// ll dummy;
 // do{
 //   // v は ループごとに
-//		 { 1, 2, 3 }
-// 		 { 1, 3, 2 } 
-//       { 2, 1, 3 }
-// 		 { 2, 3, 1 }
-//		 { 3, 1, 2 }
-// 		 { 3, 2, 1 }
+//   //  { 1, 2, 3 }, { 1, 3, 2 }, 
+//   //  { 2, 1, 3 }, { 2, 3, 1 },
+//   //  { 3, 1, 2 }, { 3, 2, 1 }
 //   // になっている。
 //   dummy = 1;
 // }while(next_permutation(v.begin(), v.end()));

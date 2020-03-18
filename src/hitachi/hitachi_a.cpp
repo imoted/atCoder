@@ -163,10 +163,16 @@ mint combination(ull s, ull r) {
 signed main() {
 	INIT;
 
-// VAR(string,s,t);
-// VEC(string,v,3);
-// VEC_ROW(string,3,2,3);
-
+VAR(string,s);
+// OUT(s.find("hi"))
+// ll out = s.find("hi");
+// if (out != std::string::npos && out <9 && out >= 0) cYes;
+if (s.size() % 2 != 0) { cout << "No" << endl; return 0; }
+REP(i, s.size() / 2) {
+	if (s[2 * i] != 'h' || s[2 * i + 1] != 'i') { cout << "No" << endl; return 0; }
+}
+cout << "Yes" << endl;
+return 0;
 
  return 0;
 }
@@ -285,14 +291,13 @@ signed main() {
 // 全順列を試す場合、再帰するよりもだいたい速い(ただし、枝刈りは難しくなる)。
 // 99%くらい以下のdo〜whileの形で使う。
 // V<ll> v = { 1, 2, 3 };
+// V<ll> w = { 1, 2, 3 };
+// ll dummy;
 // do{
 //   // v は ループごとに
-//		 { 1, 2, 3 }
-// 		 { 1, 3, 2 } 
-//       { 2, 1, 3 }
-// 		 { 2, 3, 1 }
-//		 { 3, 1, 2 }
-// 		 { 3, 2, 1 }
+//   //  { 1, 2, 3 }, { 1, 3, 2 }, 
+//   //  { 2, 1, 3 }, { 2, 3, 1 },
+//   //  { 3, 1, 2 }, { 3, 2, 1 }
 //   // になっている。
 //   dummy = 1;
 // }while(next_permutation(v.begin(), v.end()));

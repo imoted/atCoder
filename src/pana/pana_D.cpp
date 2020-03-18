@@ -159,14 +159,33 @@ mint combination(ull s, ull r) {
   return dividend / divisor;
 }
 
+ll n =0;
+
+void dfs(string s, char mx){
+	if(s.length() == n){
+		printf("%s\n", s.c_str());
+	} 
+	else {
+		for(char c='a';c<=mx;c++){
+			// dfs(s + c, ((c == mx) ? (char)(mx + 1) : mx));
+			if(c == mx){
+				dfs(s + c, (char)(mx + 1) );
+			}
+			else{
+				dfs(s + c, mx );
+			}
+		}
+	}
+}
+
 
 signed main() {
 	INIT;
 
-// VAR(string,s,t);
-// VEC(string,v,3);
-// VEC_ROW(string,3,2,3);
+//  VAR(ll,n);
+cin >> n;
 
+ dfs("", 'a');
 
  return 0;
 }
@@ -285,14 +304,13 @@ signed main() {
 // 全順列を試す場合、再帰するよりもだいたい速い(ただし、枝刈りは難しくなる)。
 // 99%くらい以下のdo〜whileの形で使う。
 // V<ll> v = { 1, 2, 3 };
+// V<ll> w = { 1, 2, 3 };
+// ll dummy;
 // do{
 //   // v は ループごとに
-//		 { 1, 2, 3 }
-// 		 { 1, 3, 2 } 
-//       { 2, 1, 3 }
-// 		 { 2, 3, 1 }
-//		 { 3, 1, 2 }
-// 		 { 3, 2, 1 }
+//   //  { 1, 2, 3 }, { 1, 3, 2 }, 
+//   //  { 2, 1, 3 }, { 2, 3, 1 },
+//   //  { 3, 1, 2 }, { 3, 2, 1 }
 //   // になっている。
 //   dummy = 1;
 // }while(next_permutation(v.begin(), v.end()));

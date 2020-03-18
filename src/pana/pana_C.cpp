@@ -163,10 +163,23 @@ mint combination(ull s, ull r) {
 signed main() {
 	INIT;
 
-// VAR(string,s,t);
-// VEC(string,v,3);
-// VEC_ROW(string,3,2,3);
+VAR(long double,a,b,c);
+long double div = 1.0/2.0;
+long double ans;
+ans = powl(a,div);
 
+// OUT(powf(a,div))
+// OUT(ans)
+
+// if( (powl(a,div) + powl(b,div) ) < powl(c,div) ){
+// 	cYes;
+// }
+// else cNo;
+
+if( a + b + 2* (powl(a,div) * powl(b,div) ) < c ){
+	cYes;
+}
+else cNo;
 
  return 0;
 }
@@ -285,14 +298,13 @@ signed main() {
 // 全順列を試す場合、再帰するよりもだいたい速い(ただし、枝刈りは難しくなる)。
 // 99%くらい以下のdo〜whileの形で使う。
 // V<ll> v = { 1, 2, 3 };
+// V<ll> w = { 1, 2, 3 };
+// ll dummy;
 // do{
 //   // v は ループごとに
-//		 { 1, 2, 3 }
-// 		 { 1, 3, 2 } 
-//       { 2, 1, 3 }
-// 		 { 2, 3, 1 }
-//		 { 3, 1, 2 }
-// 		 { 3, 2, 1 }
+//   //  { 1, 2, 3 }, { 1, 3, 2 }, 
+//   //  { 2, 1, 3 }, { 2, 3, 1 },
+//   //  { 3, 1, 2 }, { 3, 2, 1 }
 //   // になっている。
 //   dummy = 1;
 // }while(next_permutation(v.begin(), v.end()));

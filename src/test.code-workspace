@@ -1,6 +1,9 @@
 {
 	"folders": [
 		{
+			"path": "/home/tadashi/work/file-upload-server"
+		},
+		{
 			"path": "/home/tadashi/work/atcoder"
 		}
 	],
@@ -10,7 +13,32 @@
 			"/opt/ros/kinetic/lib/python2.7/dist-packages"
 		],
 		"files.associations": {
-			"ostream": "cpp"
+			"iostream": "cpp",
+			"ostream": "cpp",
+			"cmath": "cpp",
+			"array": "cpp",
+			"chrono": "cpp",
+			"string_view": "cpp",
+			"functional": "cpp",
+			"ratio": "cpp",
+			"tuple": "cpp",
+			"type_traits": "cpp",
+			"utility": "cpp",
+			"istream": "cpp",
+			"scoped_allocator": "cpp",
+			"iosfwd": "cpp",
+			"regex": "cpp",
+			"deque": "cpp",
+			"forward_list": "cpp",
+			"list": "cpp",
+			"string": "cpp",
+			"unordered_map": "cpp",
+			"unordered_set": "cpp",
+			"vector": "cpp",
+			"hash_map": "cpp",
+			"hash_set": "cpp",
+			"initializer_list": "cpp",
+			"valarray": "cpp"
 		}
 	}
 }

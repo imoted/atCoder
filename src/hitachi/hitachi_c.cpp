@@ -159,15 +159,75 @@ mint combination(ull s, ull r) {
   return dividend / divisor;
 }
 
+#define MAX_N 100
+V<ll> g[MAX_N];//tree
+V<ll> depth(MAX_N);
+int N,root=3,parent[MAX_N];
+map<ll,ll>  map_list;
+//   for (int x : A) {
+//     if (cnt.count(x)) {
+// 	  cnt[x]++;
+ll cur_d =0;
+
+void dfs(int v,int p,int d)
+//v...current vertex , p...parent of v ,d...depth of v
+{
+	depth[v]=d;
+	if(depth[v] == 3){
+		map_list[cur_d] = v;
+	}
+	for(int i=0;i<g[v].size();i++)
+	{
+		if(g[v][i]==p)continue;
+		dfs(g[v][i],v,d+1);
+	}
+}
+
+// void dist(int v,int p,int d)
+// //v...current vertex , p...parent of v ,d...depth of v
+// {
+// 	depth[v]=d;
+// 	if(depth[v] == 3){
+// 		map_list[p] = v;
+// 	}
+// 	for(int i=0;i < g[v].size();i++)
+// 	{
+// 		if(g[v][i]==p) continue;
+// 		dfs(g[v][i],v,d+1);
+// 	}
+// }
+
+void add_edge(int u,int v)
+{
+g[u].PB(v);
+g[v].PB(u);
+}
+
 
 signed main() {
 	INIT;
 
-// VAR(string,s,t);
-// VEC(string,v,3);
+VAR(ll,n);
+// VEC(ll,v,3);
 // VEC_ROW(string,3,2,3);
+V<ll> a(n-1);
+V<ll> b(n-1);
+REP(i,n-1){
+	cin >> a[i] >> b[i];
+	add_edge(a[i],b[i]);
+}
+dfs(1,0,0);
+FOR(i,1,n+1) {
+	cur_d =i;
+	dfs(i,0,0);
+	
+	
+	// *find(depth.begin(), depth.end(), 3);
+}
 
-
+// *max_element(depth.begin(), depth.end()); 
+// REP(i,n)
+// 	*find(depth.begin(), depth.end(), 7);
 
  return 0;
 }
@@ -242,6 +302,7 @@ signed main() {
 // V<ll> v = { 1, 1, 2, 2, 3, 3 };
 // v.erase(unique(v.begin(), v.end()), v.end()); // v = { 1, 2, 3 }
 
+// めちゃ遅い　要注意
 // 逆順に並べ替える。
 // 単純に逆にしたい時はもちろん、シーケンスを逆にたどるときにreverseをしておくとインデキシングが楽になるのでたまに使う。
 // V<ll> v = { 1, 2, 3, 4, 5 };
@@ -340,6 +401,14 @@ signed main() {
 // vector<vector<ull> > v(n+1,vector<ull>(n+1,0));
 // comb(v);
 
+// map配列  map へのアクセス(countなどのSTL)は、vectorなどに比べてOlogN　の計算量で早い。
+//   map<int, int> cnt;
+//   for (int x : A) {
+//     if (cnt.count(x)) {
+// 	  cnt[x]++;
+// 	}
+//   }
+
 ////////////////////////////////   文字列に対して適用   //////////////////////////
 
 //     s = s + t; //連結
@@ -350,6 +419,8 @@ signed main() {
 //     cout << s.find("abc")<< '\n';  //sの中に文字列tがあればその先頭のアドレスを返す．なければs.nopsを返却
 //        if (UPos != std::string::npos) { ans_s = A -1; }
 //     cout << s.replace(0, 3, "zxc")<< '\n'; //i番目以降k文字を文字列tで置換する．tを空文字列にすれば削除の動作
+
+// めちゃ遅い　要注意
 //     cout << s.insert(5, "ins")<< '\n'; //i番目の文字の前に文字列tを挿入
 
 // 文字列の辞書順比較
@@ -362,3 +433,15 @@ signed main() {
 // 数値から、文字列に変換、上位の数字と、下位の数字をペアにして、数値に戻す。
 //  auto s = std::to_string(i);
 //  ++map[PAIR(s.front() - '0', s.back() - '0')];
+
+// めちゃ遅い　要注意
+// 文字列を逆に並べる 引数はイテレータ
+//reverse(s.begin() ,s.end());
+
+//  連想配列
+//   map<string, int> score;
+//   score["Alice"] = 100;
+//   score["Dave"] = 95;
+//   score["Bob"] = 89;
+//  cout << score["Alice"];
+

@@ -163,10 +163,21 @@ mint combination(ull s, ull r) {
 signed main() {
 	INIT;
 
-// VAR(string,s,t);
-// VEC(string,v,3);
-// VEC_ROW(string,3,2,3);
+VAR(ll,a,b,m);
+VEC(ll,a_list,a);
+VEC(ll,b_list,b);
+V<ll> x(m);
+V<ll> y(m);
+V<ll> c(m);
+REP(i,m)	cin >> x[i] >> y[i] >> c[i];
 
+// ll tmp_min=0;
+ll tmp_min = *min_element(a_list.begin(), a_list.end()) + *min_element(b_list.begin(), b_list.end());
+
+REP(i,m) {
+	CHMIN( tmp_min , a_list[x[i]-1] + b_list[y[i]-1] - c[i]);
+}
+OUT(tmp_min)
 
  return 0;
 }
@@ -285,14 +296,13 @@ signed main() {
 // 全順列を試す場合、再帰するよりもだいたい速い(ただし、枝刈りは難しくなる)。
 // 99%くらい以下のdo〜whileの形で使う。
 // V<ll> v = { 1, 2, 3 };
+// V<ll> w = { 1, 2, 3 };
+// ll dummy;
 // do{
 //   // v は ループごとに
-//		 { 1, 2, 3 }
-// 		 { 1, 3, 2 } 
-//       { 2, 1, 3 }
-// 		 { 2, 3, 1 }
-//		 { 3, 1, 2 }
-// 		 { 3, 2, 1 }
+//   //  { 1, 2, 3 }, { 1, 3, 2 }, 
+//   //  { 2, 1, 3 }, { 2, 3, 1 },
+//   //  { 3, 1, 2 }, { 3, 2, 1 }
 //   // になっている。
 //   dummy = 1;
 // }while(next_permutation(v.begin(), v.end()));

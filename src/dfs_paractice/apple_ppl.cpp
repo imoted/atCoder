@@ -159,14 +159,23 @@ mint combination(ull s, ull r) {
   return dividend / divisor;
 }
 
+int dfs( ll m, ll n ){
+	if(n ==1) return 1;
+	int ret =0;
+	REP(i,m +1){
+		ret += dfs(m-i,n-1);
+	}
+	return ret;
+}
 
 signed main() {
 	INIT;
 
-// VAR(string,s,t);
+VAR(ll,m,n);
 // VEC(string,v,3);
 // VEC_ROW(string,3,2,3);
 
+OUT(dfs(m,n))
 
  return 0;
 }

@@ -9,7 +9,7 @@
             "name": "cpp debug",
             "type": "cppdbg",
             "request": "launch",
-            "program": "${workspaceFolder}/src/${fileBasenameNoExtension}",
+            "program": "${fileDirname}/${fileBasenameNoExtension}",
             "args": [],
             "stopAtEntry": false,
             "cwd": "${workspaceFolder}",
