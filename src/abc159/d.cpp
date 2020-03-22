@@ -163,9 +163,49 @@ mint combination(ull s, ull r) {
 signed main() {
 	INIT;
 
-// VAR(string,s,t);
-// VEC(string,v,3);
-// VEC_ROW(string,3,2,3);
+VAR(ll,n);
+VEC(ll,a,n);
+
+// V<ll> a_befo_sort = a;
+// sort(a.begin(),a.end());
+
+// map<ll,ll> map_a;
+
+// ll cnt =0;
+// ll count_a;
+// ll pair_sum =0;
+
+// REP(i,n ){
+// 	cnt++;
+// 	if(i == n -1){
+// 		pair_sum += (cnt * (cnt -1) /2 );
+// 		map_a.insert(make_pair(a[i] ,cnt));
+// 	}
+// 	else{
+// 		if(a[i] != a[i+1]){
+// 			// 要素の変化があるなら
+// 			// count_a = count(a.begin(), a.end(),a[i] ); //遅すぎ
+// 			pair_sum += (cnt * (cnt -1) /2 );
+// 			map_a.insert(make_pair(a[i] ,cnt));
+// 			cnt =0;
+// 		}
+// 	}
+// }
+// REP(i,n){
+// 	OUT(pair_sum - ( map_a[a_befo_sort[i]]  -1 ));
+// 	BR;
+// }
+
+
+map<ll, ll> cnt;
+REP(x,n) cnt[a[x]]++;
+ll ret = 0;
+REP(p,cnt.size()) ret += cnt[p] * (cnt[p] -1) / 2;
+
+REP(i,n){
+	OUT(ret - ( cnt[a[i]]  -1 ));
+	BR;
+}
 
 
  return 0;
@@ -221,12 +261,9 @@ signed main() {
 // w[0] = 2;
 // cout << equal(v.begin(), v.end(), w.begin()); // false
 
-// 配列の中から数を数える  //遅い O(N)
+// 配列の中から数を数える
 // vector<ll> v = { 1, 2, 1, 3, 2 };
 // cout << count(v.begin(), v.end(), 1); // 2
-
-// 配列で、配列内のそれぞれの要素のヒストグラムをmap　連想配列で作る
-// REP(x,n) cnt[a[x]]++; 
 
 // 配列の要素を入れ替える
 // V<ll> v = { 1, 2, 3, 2, 1 };

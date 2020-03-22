@@ -182,7 +182,7 @@ ll dfs(ll pos, ll nokori, V<V<char>>& board){
 	if(pos ==64)	return false;
 	ll y = pos / 8;
 	ll x = pos % 8;
-	if(board[x][y] =='Q'){
+	if(board[y][x] =='Q'){
 		if(isPuttable(y,x,board))
 			if(dfs(pos +1,nokori -1, board))  return true;
 	}
@@ -208,9 +208,9 @@ signed main() {
 //  OUT(c[2][7])
 
  if(dfs(0,8,c)){
-	REP(x,8){ //y
-	 	REP(y,8){ //x
-			 OUT(c[x][y]);
+	REP(y,8){ //y
+	 	REP(x,8){ //x
+			 OUT(c[y][x]);
 		}
 		BR
 	}

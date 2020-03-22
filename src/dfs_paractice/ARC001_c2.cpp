@@ -160,14 +160,70 @@ mint combination(ull s, ull r) {
 }
 
 
+bool isPuttable(ll y, ll x, V<V<char>>& board){
+	FOR(dx,-1,2){
+		FOR(dy,-1,2){
+			if(dx ==0 && dy ==0) continue;
+			ll ty=y;
+			ll tx=x;
+			while(true){
+				ty += dy;
+				tx += dx;
+				if(!( ty >=0 && tx >= 0 && ty <8 && tx <8)) break;
+				if(board[ty][tx] == 'Q') return false;
+			}
+		}
+	}
+	return true;
+}
+
+ll dfs(ll y, V<V<char>>& board){
+	if(y ==8)	return true;
+	int target = -1;
+	REP(x,8){
+		if(board[y][x] =='Q'){
+			if(target != -1) return false; 
+			target = x;
+		}
+	}
+	if(target != -1){
+		if(isPuttable(y,target,board))
+			if(dfs(y +1, board))  return true;
+	}
+	
+	else{
+		REP(x,8){
+			if(isPuttable(y,x,board)){
+				board[y][x] = 'Q';
+				if(dfs(y +1, board))  return true;
+				board[y][x] = '.';
+			}
+		}
+		// if(dfs(pos +1, board))  return true;
+	}
+	return false;
+}
+
+
 signed main() {
 	INIT;
+	
+ // http://arc001.contest.atcoder.jp/tasks/arc001_3
+ // 8*8
 
-// VAR(string,s,t);
-// VEC(string,v,3);
-// VEC_ROW(string,3,2,3);
+ MAT(char, c, 8, 8)
+//  OUT(c[2][7])
 
-
+if(dfs(0,c)){
+	REP(y,8){ //y
+	 	REP(x,8){ //x
+			 OUT(c[y][x]);
+		}
+		BR
+	}
+ }
+ else OUT("No Answer")
+ 
  return 0;
 }
 
@@ -221,12 +277,9 @@ signed main() {
 // w[0] = 2;
 // cout << equal(v.begin(), v.end(), w.begin()); // false
 
-// 配列の中から数を数える  //遅い O(N)
+// 配列の中から数を数える
 // vector<ll> v = { 1, 2, 1, 3, 2 };
 // cout << count(v.begin(), v.end(), 1); // 2
-
-// 配列で、配列内のそれぞれの要素のヒストグラムをmap　連想配列で作る
-// REP(x,n) cnt[a[x]]++; 
 
 // 配列の要素を入れ替える
 // V<ll> v = { 1, 2, 3, 2, 1 };

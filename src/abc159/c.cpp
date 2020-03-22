@@ -163,10 +163,13 @@ mint combination(ull s, ull r) {
 signed main() {
 	INIT;
 
-// VAR(string,s,t);
-// VEC(string,v,3);
-// VEC_ROW(string,3,2,3);
+VAR(ll,l);
+ld div =  ((ld)l / 3.0);
+// OUT((ld)pow(((ld)l / 3.0),3))
+// OUT( ((ld)l / 3.0) * ((ld)l / 3.0) * ((ld)l / 3.0) )
+ld ans = div * div * div;
 
+std::cout << std::setprecision(12) << ans;
 
  return 0;
 }
@@ -221,12 +224,9 @@ signed main() {
 // w[0] = 2;
 // cout << equal(v.begin(), v.end(), w.begin()); // false
 
-// 配列の中から数を数える  //遅い O(N)
+// 配列の中から数を数える
 // vector<ll> v = { 1, 2, 1, 3, 2 };
 // cout << count(v.begin(), v.end(), 1); // 2
-
-// 配列で、配列内のそれぞれの要素のヒストグラムをmap　連想配列で作る
-// REP(x,n) cnt[a[x]]++; 
 
 // 配列の要素を入れ替える
 // V<ll> v = { 1, 2, 3, 2, 1 };

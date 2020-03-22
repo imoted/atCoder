@@ -159,16 +159,44 @@ mint combination(ull s, ull r) {
   return dividend / divisor;
 }
 
+ll kaibun(string s, ll n ){
+//回文判定用変数の初期化
+ll hantei = 0;
+REP(i, n/2)	{
+	if(s[i] != s[n -1 -i]) {
+		hantei++;
+	}
+}
+    if(hantei){
+		return 0;		
+    }else{
+        return 1;
+    }
+}
 
 signed main() {
 	INIT;
 
-// VAR(string,s,t);
-// VEC(string,v,3);
-// VEC_ROW(string,3,2,3);
+VAR(string,s);
+ll n = s.size();
 
+string t = s.substr(0, (n -1 )/2 );
+string u = s.substr((n +3 )/2 -1, n -1 );
 
- return 0;
+int flag_no =0;
+
+if(kaibun(s ,n )){
+	if(kaibun(t ,t.size() )){
+		if(kaibun(u ,u.size() )){
+			cYes;
+			// flag_no =1;
+		}
+		else cNo;
+	}
+	else cNo;
+}
+else cNo;
+
 }
 
 //////////////////////////  数値、Vectorなど配列に適用 ///////////////////////////
@@ -221,12 +249,9 @@ signed main() {
 // w[0] = 2;
 // cout << equal(v.begin(), v.end(), w.begin()); // false
 
-// 配列の中から数を数える  //遅い O(N)
+// 配列の中から数を数える
 // vector<ll> v = { 1, 2, 1, 3, 2 };
 // cout << count(v.begin(), v.end(), 1); // 2
-
-// 配列で、配列内のそれぞれの要素のヒストグラムをmap　連想配列で作る
-// REP(x,n) cnt[a[x]]++; 
 
 // 配列の要素を入れ替える
 // V<ll> v = { 1, 2, 3, 2, 1 };
