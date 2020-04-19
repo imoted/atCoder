@@ -142,6 +142,12 @@ struct ModInt{
 };
 typedef ModInt<MOD> mint;
 
+// typedef pair<int, int> pii;
+// typedef pair<ll, int> pli;
+// typedef pair<ll, ll> pll;
+// typedef vector<int> veci;
+// typedef vector<long long> vecl;
+ 
 mint combination(ull s, ull r) {
   if ( r * 2 > s ) r = s - r;
   mint dividend = 1;
@@ -153,14 +159,56 @@ mint combination(ull s, ull r) {
   return dividend / divisor;
 }
 
+string shift;
+
+ll dfs(ll on,ll now, ll c){
+	if(on ==0)	return 1;
+	if(now > shift.size() -1) return 0;
+	if(shift[now] == 'o'){
+		string old_shift = shift;
+		FOR(i,1,c) shift[now +i] = 'x';
+		if(!dfs(on -1, now +1 ,c )){
+			shift = old_shift;
+			shift[now] = 'x';
+		}
+	}
+	else dfs(on, now +1 ,c );
+	// dfs(on, now +1 ,c );
+}
+
 
 signed main() {
 	INIT;
 
+VAR(ll,n,k,c);
+VAR(string,s);
 
+// cin >> shift;
+// dfs(k,0,c);
 
-// VEC(ll,v,n);
-// MAT(ll,c,n,m);
+  vector<int> b(n, -1);
+  {
+    int i = 0;
+    for (int t = 0; t < k; ++t) {
+      while (s[i] == 'x') {
+        ++i;
+      }
+      b[i] = t;
+      i += c + 1;
+    }
+  }
+  vector<int> dp(3 * n);
+  for (int i = n; i--; ) {
+    dp[i] = dp[i + 1];
+    if (s[i] == 'o') {
+      dp[i] = max(dp[i], 1 + dp[i + c + 1]);
+    }
+  }
+  for (int i = 0; i < n; ++i) {
+    if (b[i] != -1 and b[i] + dp[i + 1] < k) {
+      cout << i + 1 << '\n';
+    }
+  }
 
 
  return 0;
@@ -169,7 +217,6 @@ signed main() {
 //////////////////////////  数値、Vectorなど配列に適用 ///////////////////////////
 
 //     vector<int> a{1,2,3,4,5};
-//	   vector<int> b(n, -1);  // nは配列大きさ、 -1は初期値
 //     cout << a.size()<< '\n'; //aの大きさ
 //     cout << a[3]<< '\n'; //i番目の要素にアクセス
 //     cout << a.front()<< '\n';  //先頭を参照
@@ -192,14 +239,6 @@ signed main() {
 // 数値型への変換
 //   string s = "1";
 //  int a = s[0]-'0';
-
-// charから数値への変換
-// std::stoi()	int
-// std::stol()	long
-// std::stoll()	long long
-// std::stof()	float
-// std::stod()	double
-// std::stold()	long double
 
 // ２つの変数をスワップ
 // int a = 1;
@@ -356,8 +395,6 @@ signed main() {
 // 	}
 //   }
 
-// 1 << (h-1)   2 の h乗の表現
-
 ////////////////////////////////   文字列に対して適用   //////////////////////////
 
 //     s = s + t; //連結
@@ -394,9 +431,3 @@ signed main() {
 //   score["Bob"] = 89;
 //  cout << score["Alice"];
 
-// 「"」で囲われた文字列は、文字列が格納されたメモリのアドレスを意味します。 
-// string s = 'AAA'; // NG 文字の実態を表している
-// string t = "AAA"; // OK 文字列のアドレスを表している
-// char c = 'A';     // OK 文字の実態を表している
-// char d = *"A";    // OK   
-// char e = "A"      // NG 文字列のアドレスを表している

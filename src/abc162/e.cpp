@@ -157,6 +157,12 @@ mint combination(ull s, ull r) {
 signed main() {
 	INIT;
 
+VAR(ll,n,k);
+int i =0;
+while( i > 0){
+	
+
+}
 
 
 // VEC(ll,v,n);

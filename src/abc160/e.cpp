@@ -142,6 +142,12 @@ struct ModInt{
 };
 typedef ModInt<MOD> mint;
 
+// typedef pair<int, int> pii;
+// typedef pair<ll, int> pli;
+// typedef pair<ll, ll> pll;
+// typedef vector<int> veci;
+// typedef vector<long long> vecl;
+ 
 mint combination(ull s, ull r) {
   if ( r * 2 > s ) r = s - r;
   mint dividend = 1;
@@ -153,23 +159,109 @@ mint combination(ull s, ull r) {
   return dividend / divisor;
 }
 
+V<ll> p;
+V<ll> q;
+V<ll> r;
+
+// ll bfs(ll x, ll y,ll p_i, ll q_i, ll r_i,ll taste){
+// 	if(x <= 0 && y <=0) return taste;
+// 	if(p_i < 0 || x <= 0 ){
+// 		if(q[q_i] >= r[r_i] || r_i < 0) {
+// 			taste += q[q_i];
+// 			y--;
+// 			q_i--;
+// 			bfs(x,y,p_i,q_i,r_i,taste);
+// 		}
+// 		else{
+// 			taste += r[r_i];
+// 			y--;
+// 			r_i--;
+// 			bfs(x,y,p_i,q_i,r_i,taste);
+// 		}
+// 	}
+// 	else if( q_i < 0 || y <=0){
+// 		if(p[p_i] >= r[r_i] || r_i < 0) {
+// 			taste += p[p_i];
+// 			x--;
+// 			p_i--;
+// 			bfs(x,y,p_i,q_i,r_i,taste);
+// 		}
+// 		else{
+// 			taste += r[r_i];
+// 			x--;
+// 			r_i--;
+// 			bfs(x,y,p_i,q_i,r_i,taste);
+// 		}
+// 	}
+// 	else if(p[p_i] >= q[q_i]) {
+// 		if(p[p_i] >= r[r_i] || r_i < 0) {
+// 			taste += p[p_i];
+// 			x--;
+// 			p_i--;
+// 			bfs(x,y,p_i,q_i,r_i,taste);
+// 		}
+// 		else{
+// 			taste += r[r_i];
+// 			x--;
+// 			r_i--;
+// 			bfs(x,y,p_i,q_i,r_i,taste);
+// 		}
+// 	}
+// 	else{
+// 		if(q[q_i] >= r[r_i] || r_i < 0) {
+// 			taste += q[q_i];
+// 			y--;
+// 			q_i--;
+// 			bfs(x,y,p_i,q_i,r_i,taste);
+// 		}
+// 		else{
+// 			taste += r[r_i];
+// 			y--;
+// 			r_i--;
+// 			bfs(x,y,p_i,q_i,r_i,taste);
+// 		}
+// 	}
+// }
 
 signed main() {
 	INIT;
 
+VAR(ll,x,y,a,b,c);
+ll tmp;
+REP(i,a){ cin>>tmp; p.PB(tmp); }
+REP(i,b){ cin>>tmp; q.PB(tmp); }
+REP(i,c){ cin>>tmp; r.PB(tmp); }
 
+sort(p.begin(), p.end(), greater<>());
+sort(q.begin(), q.end(), greater<>());
+sort(r.begin(), r.end(), greater<>());
 
-// VEC(ll,v,n);
-// MAT(ll,c,n,m);
+// OUT(bfs(x,y,a-1,b-1,c-1,0))
 
+ll S = 0;
+priority_queue<ll, vector<ll>, greater<ll>> Q;  //優先順位付きキュー
+for (int i = 0; i < x; ++i) {
+	S += p[i];
+	Q.emplace(p[i]); // 直接構築でキューに要素を追加する。
+}
+for (int i = 0; i < y; ++i) {
+	S += q[i];
+	Q.emplace(q[i]); // 直接構築でキューに要素を追加する。
+}
+ll ans = S;
+for (int i = 0; i < min(c, x+y); ++i) {
+	S -= Q.top(); Q.pop();
+	S += r[i];
+	ans = max(ans, S);
+}
+cout << ans << "\n";
+return 0;
 
- return 0;
 }
 
 //////////////////////////  数値、Vectorなど配列に適用 ///////////////////////////
 
 //     vector<int> a{1,2,3,4,5};
-//	   vector<int> b(n, -1);  // nは配列大きさ、 -1は初期値
 //     cout << a.size()<< '\n'; //aの大きさ
 //     cout << a[3]<< '\n'; //i番目の要素にアクセス
 //     cout << a.front()<< '\n';  //先頭を参照
@@ -192,14 +284,6 @@ signed main() {
 // 数値型への変換
 //   string s = "1";
 //  int a = s[0]-'0';
-
-// charから数値への変換
-// std::stoi()	int
-// std::stol()	long
-// std::stoll()	long long
-// std::stof()	float
-// std::stod()	double
-// std::stold()	long double
 
 // ２つの変数をスワップ
 // int a = 1;
@@ -356,8 +440,6 @@ signed main() {
 // 	}
 //   }
 
-// 1 << (h-1)   2 の h乗の表現
-
 ////////////////////////////////   文字列に対して適用   //////////////////////////
 
 //     s = s + t; //連結
@@ -394,9 +476,3 @@ signed main() {
 //   score["Bob"] = 89;
 //  cout << score["Alice"];
 
-// 「"」で囲われた文字列は、文字列が格納されたメモリのアドレスを意味します。 
-// string s = 'AAA'; // NG 文字の実態を表している
-// string t = "AAA"; // OK 文字列のアドレスを表している
-// char c = 'A';     // OK 文字の実態を表している
-// char d = *"A";    // OK   
-// char e = "A"      // NG 文字列のアドレスを表している

@@ -142,6 +142,12 @@ struct ModInt{
 };
 typedef ModInt<MOD> mint;
 
+// typedef pair<int, int> pii;
+// typedef pair<ll, int> pli;
+// typedef pair<ll, ll> pll;
+// typedef vector<int> veci;
+// typedef vector<long long> vecl;
+ 
 mint combination(ull s, ull r) {
   if ( r * 2 > s ) r = s - r;
   mint dividend = 1;
@@ -153,15 +159,81 @@ mint combination(ull s, ull r) {
   return dividend / divisor;
 }
 
+// V<ll> runrun(1e5);
+
+// ll dfs(ll ll_s){
+// ll dfs(string s){	// これだと、遅すぎる。たぶん数時間。
+// 	// string s = to_string(ll_s);
+// 	// ll ll_s = stoi(s);
+// 	ll i = s.size();
+// 	if(i == 1){
+// 		return 1;
+// 	}
+// 	else{
+// 		if(s[0] == s[1] -1||s[0] == s[1]||s[0] == s[1] +1) {
+// 			if(dfs(s.substr(1)))
+// 				return 1;
+// 			else
+// 				return 0;			
+// 		}
+// 		else
+// 			return 0;
+// 	}
+// }
+
+
+V<ll> runrun;
 
 signed main() {
 	INIT;
 
+VAR(ll,k);
+
+// FOR(i,1,10) runrun.PB(i);
+// ll j = 10;  // これだと、遅すぎる。たぶん数時間。
+// ll i =0;
+// while (true)
+// {
+// 	if(runrun.size() == 1e5){
+// 		break;
+// 	}
+// 	if(dfs(to_string(j)) ){
+// 		// runrun.PB(j);
+// 		runrun[i] = j;
+// 		i++;
+// 	}
+// 	j++;
+// }
+
+queue<ll> que_next;
+string s;
+ll val=0;
+V<ll>op = {-1,0,1};
+
+FOR(i,1,10) {
+	que_next.push(i);
+}
 
 
-// VEC(ll,v,n);
-// MAT(ll,c,n,m);
+while(!que_next.empty())
+{
+	if(runrun.size() == 1e5){
+		break;
+	}
+	val = que_next.front(); que_next.pop();
+	runrun.PB(val);
+	s = to_string(val);
+	REP(j,3){
+		ll vt = s[s.size() -1] - '0' + op[j];
+		if(vt >= 0 && vt < 10 ){
+			string new_s = s + to_string(vt);
+			que_next.push(stoll(new_s));
+		}
+	}
+}
 
+
+OUT(runrun[k -1])
 
  return 0;
 }
@@ -169,7 +241,6 @@ signed main() {
 //////////////////////////  数値、Vectorなど配列に適用 ///////////////////////////
 
 //     vector<int> a{1,2,3,4,5};
-//	   vector<int> b(n, -1);  // nは配列大きさ、 -1は初期値
 //     cout << a.size()<< '\n'; //aの大きさ
 //     cout << a[3]<< '\n'; //i番目の要素にアクセス
 //     cout << a.front()<< '\n';  //先頭を参照
@@ -192,14 +263,6 @@ signed main() {
 // 数値型への変換
 //   string s = "1";
 //  int a = s[0]-'0';
-
-// charから数値への変換
-// std::stoi()	int
-// std::stol()	long
-// std::stoll()	long long
-// std::stof()	float
-// std::stod()	double
-// std::stold()	long double
 
 // ２つの変数をスワップ
 // int a = 1;
@@ -356,8 +419,6 @@ signed main() {
 // 	}
 //   }
 
-// 1 << (h-1)   2 の h乗の表現
-
 ////////////////////////////////   文字列に対して適用   //////////////////////////
 
 //     s = s + t; //連結
@@ -368,6 +429,7 @@ signed main() {
 //     cout << s.find("abc")<< '\n';  //sの中に文字列tがあればその先頭のアドレスを返す．なければs.nopsを返却
 //        if (UPos != std::string::npos) { ans_s = A -1; }
 //     cout << s.replace(0, 3, "zxc")<< '\n'; //i番目以降k文字を文字列tで置換する．tを空文字列にすれば削除の動作
+
 
 // めちゃ遅い　要注意
 //     cout << s.insert(5, "ins")<< '\n'; //i番目の文字の前に文字列tを挿入
@@ -383,7 +445,7 @@ signed main() {
 //  auto s = std::to_string(i);
 //  ++map[PAIR(s.front() - '0', s.back() - '0')];
 
-// めちゃ遅い　要注意
+// めちゃ遅い　要注意 
 // 文字列を逆に並べる 引数はイテレータ
 //reverse(s.begin() ,s.end());
 
@@ -394,9 +456,3 @@ signed main() {
 //   score["Bob"] = 89;
 //  cout << score["Alice"];
 
-// 「"」で囲われた文字列は、文字列が格納されたメモリのアドレスを意味します。 
-// string s = 'AAA'; // NG 文字の実態を表している
-// string t = "AAA"; // OK 文字列のアドレスを表している
-// char c = 'A';     // OK 文字の実態を表している
-// char d = *"A";    // OK   
-// char e = "A"      // NG 文字列のアドレスを表している

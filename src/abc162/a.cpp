@@ -157,7 +157,12 @@ mint combination(ull s, ull r) {
 signed main() {
 	INIT;
 
+VAR(string,n);
 
+REP(i,n.size()){
+	if(n[i] == '7'){ cYes; return 0;}
+}
+cNo;
 
 // VEC(ll,v,n);
 // MAT(ll,c,n,m);

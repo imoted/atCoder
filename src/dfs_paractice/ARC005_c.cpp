@@ -142,6 +142,12 @@ struct ModInt{
 };
 typedef ModInt<MOD> mint;
 
+// typedef pair<int, int> pii;
+// typedef pair<ll, int> pli;
+// typedef pair<ll, ll> pll;
+// typedef vector<int> veci;
+// typedef vector<long long> vecl;
+ 
 mint combination(ull s, ull r) {
   if ( r * 2 > s ) r = s - r;
   mint dividend = 1;
@@ -154,22 +160,69 @@ mint combination(ull s, ull r) {
 }
 
 
+
 signed main() {
 	INIT;
 
+VAR(ll,h,w);
+MAT(char,c,h,w)
+
+// OUT(c[0][0])
+
+queue<ll> currq;
 
 
-// VEC(ll,v,n);
-// MAT(ll,c,n,m);
+ll fx, fy;
 
+REP(i,h){
+	REP(j,w){
+		if(c[i][j] == 's'){
+			fy = i;
+			fx = j;
+		}
+	}
+}
 
- return 0;
+V<V<bool>> check(h, vector<bool>(w));
+check[fx][fy] = true;
+currq.push(fy * 500 + fx);
+
+V<ll> dx ={-1,1,0 ,0 };
+V<ll> dy ={ 0,0,-1,1 };
+
+REP(i,3){
+	queue<ll> nextq;
+	while(!currq.empty()){
+		ll now = currq.front(); currq.pop();
+		ll y = now / 500;
+		ll x = now % 500;
+		REP(j,4){
+			ll ty=y + dy[j];
+			ll tx=x + dx[j];
+			if(!( ty >=0 && tx >= 0 && ty <h && tx <w)) continue;
+			if(check[ty][tx] == true ) continue;
+			check[ty][tx] = true;
+			if(c[ty][tx] == 'g') {
+				cYES;
+				return 0;
+			}
+			else if(c[ty][tx] == '#'){
+				nextq.push(500* ty + tx);
+			}
+			else{
+				currq.push(500* ty + tx);
+			}
+		}	
+	}
+	currq = nextq;
+}
+cNO;
+return 0;
 }
 
 //////////////////////////  数値、Vectorなど配列に適用 ///////////////////////////
 
 //     vector<int> a{1,2,3,4,5};
-//	   vector<int> b(n, -1);  // nは配列大きさ、 -1は初期値
 //     cout << a.size()<< '\n'; //aの大きさ
 //     cout << a[3]<< '\n'; //i番目の要素にアクセス
 //     cout << a.front()<< '\n';  //先頭を参照
@@ -192,14 +245,6 @@ signed main() {
 // 数値型への変換
 //   string s = "1";
 //  int a = s[0]-'0';
-
-// charから数値への変換
-// std::stoi()	int
-// std::stol()	long
-// std::stoll()	long long
-// std::stof()	float
-// std::stod()	double
-// std::stold()	long double
 
 // ２つの変数をスワップ
 // int a = 1;
@@ -225,12 +270,9 @@ signed main() {
 // w[0] = 2;
 // cout << equal(v.begin(), v.end(), w.begin()); // false
 
-// 配列の中から数を数える  //遅い O(N)
+// 配列の中から数を数える
 // vector<ll> v = { 1, 2, 1, 3, 2 };
 // cout << count(v.begin(), v.end(), 1); // 2
-
-// 配列で、配列内のそれぞれの要素のヒストグラムをmap　連想配列で作る
-// REP(x,n) cnt[a[x]]++; 
 
 // 配列の要素を入れ替える
 // V<ll> v = { 1, 2, 3, 2, 1 };
@@ -356,8 +398,6 @@ signed main() {
 // 	}
 //   }
 
-// 1 << (h-1)   2 の h乗の表現
-
 ////////////////////////////////   文字列に対して適用   //////////////////////////
 
 //     s = s + t; //連結
@@ -394,9 +434,3 @@ signed main() {
 //   score["Bob"] = 89;
 //  cout << score["Alice"];
 
-// 「"」で囲われた文字列は、文字列が格納されたメモリのアドレスを意味します。 
-// string s = 'AAA'; // NG 文字の実態を表している
-// string t = "AAA"; // OK 文字列のアドレスを表している
-// char c = 'A';     // OK 文字の実態を表している
-// char d = *"A";    // OK   
-// char e = "A"      // NG 文字列のアドレスを表している

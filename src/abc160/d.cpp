@@ -142,6 +142,12 @@ struct ModInt{
 };
 typedef ModInt<MOD> mint;
 
+// typedef pair<int, int> pii;
+// typedef pair<ll, int> pli;
+// typedef pair<ll, ll> pll;
+// typedef vector<int> veci;
+// typedef vector<long long> vecl;
+ 
 mint combination(ull s, ull r) {
   if ( r * 2 > s ) r = s - r;
   mint dividend = 1;
@@ -153,23 +159,89 @@ mint combination(ull s, ull r) {
   return dividend / divisor;
 }
 
+// #define MAX_N 100
+// V<ll> g[MAX_N];//tree
+// V<ll> depth(MAX_N);
+// int N,root=3,parent[MAX_N];
+// map<ll,ll>  map_list;
+// ll cur_d =0;
+
+// void dfs(int v,int p,int d)
+// //v...current vertex , p...parent of v ,d...depth of v
+// {
+// 	// depth[v]=d;
+// 	// if(depth[v] == 3){
+// 	// 	map_list[cur_d] = v;
+// 	// }
+// 	// for(int i=0;i<g[v].size();i++)
+// 	// {
+// 	// 	if(g[v][i]==p)continue;
+// 	// 	dfs(g[v][i],v,d+1);
+// 	// }
+// }
+
+
+// void add_edge(int u,int v)
+// {
+// g[u].PB(v);
+// g[v].PB(u);
+// }
+
 
 signed main() {
 	INIT;
 
+VAR(ll,n,x,y);
 
+// FOR(i,1,n){
+// 	if(i ==1){
+// 		OUT(n) BR
+// 	}
+// 	else if(n %2 ==1){ //奇数
+// 		if((x == 1 && y == 2)|| (y ==1 && x ==2 ))			OUT(n -i +1 ) 
+// 		else if((x ==1 && y == n) || (x ==n && y == 1))			OUT(n -i -2 )
+// 		else	OUT(n -i -1)
+// 		BR
+// 	}
+// 	else if(n %2 ==0){
+// 		if((x == 1 && y == 2)|| (y ==1 && x ==2 ))				OUT(n -i) 
+// 		else if((x ==1 && y == n) || (x ==n && y == 1))			OUT(n -i +2 ) 
+// 		else    OUT(n-i +1) 
+// 		BR
+// 	}
+// }
 
-// VEC(ll,v,n);
-// MAT(ll,c,n,m);
-
-
- return 0;
+    x--; y--;
+    vector<int> edges[2000];
+    for(int i=0; i<n-1; i++){
+        edges[i].push_back(i+1);
+        edges[i+1].push_back(i);
+    }
+    edges[x].push_back(y);
+    edges[y].push_back(x);
+ 
+    vector<int> ans(n);
+    for(int s=0; s<n; s++){
+        vector<int> dist(n, 1e9);
+        queue<int> que;
+        dist[s] = 0;
+        que.push(s);
+        while(que.size()){
+            int i = que.front(); que.pop();
+            for(int j : edges[i]) if(dist[j] == 1e9){
+                dist[j] = dist[i] + 1;
+                que.push(j);
+            }
+        }
+        for(int i=s+1; i<n; i++) ans[dist[i]]++;
+    }
+    for(int i=1; i<n; i++) cout << ans[i] << endl;
+    return 0;
 }
 
 //////////////////////////  数値、Vectorなど配列に適用 ///////////////////////////
 
 //     vector<int> a{1,2,3,4,5};
-//	   vector<int> b(n, -1);  // nは配列大きさ、 -1は初期値
 //     cout << a.size()<< '\n'; //aの大きさ
 //     cout << a[3]<< '\n'; //i番目の要素にアクセス
 //     cout << a.front()<< '\n';  //先頭を参照
@@ -192,14 +264,6 @@ signed main() {
 // 数値型への変換
 //   string s = "1";
 //  int a = s[0]-'0';
-
-// charから数値への変換
-// std::stoi()	int
-// std::stol()	long
-// std::stoll()	long long
-// std::stof()	float
-// std::stod()	double
-// std::stold()	long double
 
 // ２つの変数をスワップ
 // int a = 1;
@@ -356,8 +420,6 @@ signed main() {
 // 	}
 //   }
 
-// 1 << (h-1)   2 の h乗の表現
-
 ////////////////////////////////   文字列に対して適用   //////////////////////////
 
 //     s = s + t; //連結
@@ -394,9 +456,3 @@ signed main() {
 //   score["Bob"] = 89;
 //  cout << score["Alice"];
 
-// 「"」で囲われた文字列は、文字列が格納されたメモリのアドレスを意味します。 
-// string s = 'AAA'; // NG 文字の実態を表している
-// string t = "AAA"; // OK 文字列のアドレスを表している
-// char c = 'A';     // OK 文字の実態を表している
-// char d = *"A";    // OK   
-// char e = "A"      // NG 文字列のアドレスを表している

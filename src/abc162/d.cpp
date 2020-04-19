@@ -61,7 +61,7 @@ template<class T> using VV = V<V<T>>;
 // }
  
 // type/const
-#define int ll
+// #define int ll
 using ll = long long;
 using ull = unsigned long long;
 using ld = long double;
@@ -157,7 +157,44 @@ mint combination(ull s, ull r) {
 signed main() {
 	INIT;
 
+VAR(ll,n);
+VAR(string,s);
 
+ll ans=0;
+
+// FOR(i,0,n){  //これでは計算が間に合わない
+// 	FOR(j,i,n){
+// 		if(s[i]  != s[j]){
+// 		FOR(k,max(i,j)+1,n){
+// 			if(s[j] != s[k]){
+// 			if (( j -i  ) !=( k-j )) {
+// 				if(s[i] != s[k]){
+// 					ans++;
+// 				}
+// 			}
+// 		}
+// 		}
+// 		}
+// 	}
+// }
+// OUT(ans)
+
+map<char, ll> map_s;
+
+REP(i,s.size())
+	map_s[s[i]]++;
+
+ans = map_s['R'] * map_s['G'] * map_s['B'];
+
+FOR(i,0,n){
+	FOR(j,i,n ){
+		ll k = 2*j -i;
+		if ( k < s.size() && s[k] != s[i] && s[k] != s[j] && s[i] != s[j])  {
+			ans--;
+		}
+	}
+}
+OUT(ans)
 
 // VEC(ll,v,n);
 // MAT(ll,c,n,m);

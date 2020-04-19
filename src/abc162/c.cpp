@@ -153,11 +153,39 @@ mint combination(ull s, ull r) {
   return dividend / divisor;
 }
 
+int gcd(int a, int b)
+{
+   if (a%b == 0)
+   {
+       return(b);
+   }
+   else
+   {
+       return(gcd(b, a%b));
+   }
+}
+
 
 signed main() {
 	INIT;
 
+VAR(ll,k);
+ll ans =0;
+map<ll,ll> map;
+k++;
 
+
+FOR(i,1,k){
+	FOR(j,1,k){
+		FOR(m,1,k){
+			// min_val = min(i,j,m);
+			ans += gcd(gcd(i,j),m);
+		}
+	}
+}
+
+
+OUT(ans);
 
 // VEC(ll,v,n);
 // MAT(ll,c,n,m);

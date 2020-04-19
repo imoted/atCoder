@@ -157,7 +157,20 @@ mint combination(ull s, ull r) {
 signed main() {
 	INIT;
 
+VAR(ll,n);
 
+ll ans = 0.5 * (n +1) * n;
+
+FOR(i,1,n +1){
+	if(i % 3 == 0){
+		ans -= i;
+	}
+	else if(i % 5 == 0){
+		ans -= i;
+	}
+}
+
+OUT(ans)
 
 // VEC(ll,v,n);
 // MAT(ll,c,n,m);
