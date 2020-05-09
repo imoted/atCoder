@@ -153,17 +153,73 @@ mint combination(ull s, ull r) {
   return dividend / divisor;
 }
 
+// ll a,b,c,n;
+// ll var(3),n;
 
-void main() {
+// int dfs(ll a,ll b,ll c){
+	
+// }
+ll n;
+
+int main() {
 	INIT;
 
+cin >> n ;
+V<ll> var(3);
+REP(i,3){
+	cin >> var[i];
+}	
 
+VEC(string,s,n)
+string ans;
+char lc, rc;
+int li,ri;
+s.PB("AB");
 
-// VEC(ll,v,n);
-// MAT(ll,c,n,m);
+REP(i,n){
+	// if(s[i] == "AB"){
+	lc = s[i][0];
+	if(lc == 'A')
+		li = 0;
+	else if(lc == 'B')
+		li = 1;
+	else if(lc == 'C')
+		li = 2;
+	rc = s[i][1];
+	if(rc == 'A')
+		ri = 0;
+	else if(rc == 'B')
+		ri = 1;
+	else if(rc == 'C')
+		ri = 2;
 
+	auto add = [&](int a,int b){
+		var[a]++;
+		var[b]--;
+		ans += 'A' + a;
+	};
+	if(var[li]==0 && var[ri]==0){
+		cNo; return 0;
+	}
+	else if(var[li] > var[ri]) 
+	// else if(var[ri] ==0) 
+		add(ri,li);
+	else if(var[ri] > var[li])
+	// else if(var[li] ==0)
+		add(li,ri);
+	else{
+		if(s[i+1][0] == lc || s[i+1][1] == lc)
+			add(li,ri);
+		else 
+			add(ri,li);
+	}
+}
+cYes;
+REP(i,n){
+	OUT(ans[i]) BR;
+}
 
- return;
+ return 0;
 }
 
 //////////////////////////  数値、Vectorなど配列に適用 ///////////////////////////

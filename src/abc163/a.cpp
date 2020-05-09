@@ -61,7 +61,7 @@ template<class T> using VV = V<V<T>>;
 // }
  
 // type/const
-// #define int ll
+#define int ll
 using ll = long long;
 using ull = unsigned long long;
 using ld = long double;
@@ -154,8 +154,12 @@ mint combination(ull s, ull r) {
 }
 
 
-void main() {
+signed main() {
 	INIT;
+
+VAR(ld,r);
+cout << std::setprecision(20) << r * 2 * PI;
+
 
 
 
@@ -163,7 +167,7 @@ void main() {
 // MAT(ll,c,n,m);
 
 
- return;
+ return 0;
 }
 
 //////////////////////////  数値、Vectorなど配列に適用 ///////////////////////////

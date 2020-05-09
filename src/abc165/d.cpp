@@ -61,7 +61,7 @@ template<class T> using VV = V<V<T>>;
 // }
  
 // type/const
-// #define int ll
+#define int ll
 using ll = long long;
 using ull = unsigned long long;
 using ld = long double;
@@ -154,16 +154,45 @@ mint combination(ull s, ull r) {
 }
 
 
-void main() {
+signed main() {
 	INIT;
 
+VAR(ll,a,b,n)
+
+
+// ll ans =0;
+// ll tmp_ans=0;
+// if (a ==1)   // 以下はwrong answer
+// 	OUT(0)
+// else if(a* 10e6 < b ){
+// 	OUT(a-1)
+// }
+// else{
+// 	REP(i,n){
+// 		ans = (a * (n-i)) / b - a * ((n-i) / b);
+// 		if(ans < tmp_ans ){
+// 			OUT(tmp_ans)
+// 			break;
+// 		}
+// 		tmp_ans = ans;
+// 	}
+// }
+int ans =0;
+int x =0;
+if(n >= b -1)
+	x = b-1;
+else
+	x = n;
+
+ans = ((a * x) / b) - a * (x / b);
+OUT(ans)
 
 
 // VEC(ll,v,n);
 // MAT(ll,c,n,m);
 
 
- return;
+ return 0;
 }
 
 //////////////////////////  数値、Vectorなど配列に適用 ///////////////////////////

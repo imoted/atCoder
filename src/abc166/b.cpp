@@ -61,7 +61,7 @@ template<class T> using VV = V<V<T>>;
 // }
  
 // type/const
-// #define int ll
+#define int ll
 using ll = long long;
 using ull = unsigned long long;
 using ld = long double;
@@ -154,16 +154,37 @@ mint combination(ull s, ull r) {
 }
 
 
-void main() {
+signed main() {
 	INIT;
 
+VAR(ll,n,k)
 
+map<ll,ll> sunuke;
+
+REP(i,k){
+	ll d;
+	cin >> d;
+	V<ll> a(d);
+	REP(j,d){
+		cin >> a[j];
+		sunuke[a[j]]++;
+	}
+	
+}
+ll ans =0;
+FOR(i,1,n+1){
+	if(sunuke[i] == 0){
+		ans++;
+	}
+}
+
+OUT(ans)
 
 // VEC(ll,v,n);
 // MAT(ll,c,n,m);
 
 
- return;
+ return 0;
 }
 
 //////////////////////////  数値、Vectorなど配列に適用 ///////////////////////////

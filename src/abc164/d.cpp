@@ -61,7 +61,7 @@ template<class T> using VV = V<V<T>>;
 // }
  
 // type/const
-// #define int ll
+#define int ll
 using ll = long long;
 using ull = unsigned long long;
 using ld = long double;
@@ -154,16 +154,58 @@ mint combination(ull s, ull r) {
 }
 
 
-void main() {
+signed main() {
 	INIT;
 
+VAR(string,s)
+ll tmp;
+ll cnt =0;
+string tmp_str;
 
+// REP(i,s.size() -3){  // 間に合わないし、out of range
+// 	FOR(j,i+4,s.size()+1){
+// 		tmp_str = s.substr(i, j);
+// 		tmp = stold(tmp_str);
+// 		if((tmp % 2019) ==0 )
+// 			cnt++;
+// 	}
 
-// VEC(ll,v,n);
-// MAT(ll,c,n,m);
+// }
+// OUT(cnt)
+ll i=1;
+ll sum=0;
+ll sum_ans=0;
+string sum_str;
 
+// OUT(2 * pow(10,5));
+map<ll,ll,ll> ;
 
- return;
+// while( sum <= (2 * pow(10,5)) ){
+// 	sum = 2019 * i;
+// }
+
+while( sum <= (2 * pow(10,5)) ){
+	sum = 2019 * i;
+	sum_str = to_string(sum);
+	REP(k,s.size() - sum_str.size() +1 ){
+		REP(j,sum_str.size()){
+			ll itr = k +j;
+			if(s[itr]== sum_str[j] ){
+				cnt++;
+			}
+		}
+		if(cnt == sum_str.size() && map_sum[sum_str] == 0){
+			sum_ans++;
+			map_sum[sum_str] =1;
+		}
+		cnt =0;
+	}
+	i++;
+}
+
+OUT(sum_ans)
+
+ return 0;
 }
 
 //////////////////////////  数値、Vectorなど配列に適用 ///////////////////////////

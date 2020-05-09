@@ -61,7 +61,7 @@ template<class T> using VV = V<V<T>>;
 // }
  
 // type/const
-// #define int ll
+#define int ll
 using ll = long long;
 using ull = unsigned long long;
 using ld = long double;
@@ -154,16 +154,44 @@ mint combination(ull s, ull r) {
 }
 
 
-void main() {
+signed main() {
 	INIT;
 
+VAR(ll,n,m)
+VEC(ll,h,n)
 
+V<ll> a(m);
+V<ll> b(m);
+REP(i,m){
+	cin >> a[i];
+	cin >> b[i];
+}
+vector<vector<int>> vec(n+1);
+REP(i,m){
+	vec[b[i] -1].PB(a[i] -1);
+	vec[a[i] -1].PB(b[i] -1);
+}
 
-// VEC(ll,v,n);
+ll f_n_top=0;
+ll ans =0;
+
+REP(i,n){
+	REP(j,vec[i].size()){
+		if(h[i] <= h[vec[i][j]]){
+			f_n_top = 1;
+		}
+	}
+	if(f_n_top == 0){
+		ans++;
+	}
+	f_n_top =0;
+}
+OUT(ans)
+
 // MAT(ll,c,n,m);
 
 
- return;
+ return 0;
 }
 
 //////////////////////////  数値、Vectorなど配列に適用 ///////////////////////////

@@ -61,7 +61,7 @@ template<class T> using VV = V<V<T>>;
 // }
  
 // type/const
-// #define int ll
+#define int ll
 using ll = long long;
 using ull = unsigned long long;
 using ld = long double;
@@ -154,16 +154,17 @@ mint combination(ull s, ull r) {
 }
 
 
-void main() {
+signed main() {
 	INIT;
+VAR(ll,n)
+VEC(string,s,n);
 
-
-
-// VEC(ll,v,n);
-// MAT(ll,c,n,m);
-
-
- return;
+map<string,ll> map_var;
+REP(i,n){
+	map_var[s[i]]++;
+}
+OUT(map_var.size())
+ return 0;
 }
 
 //////////////////////////  数値、Vectorなど配列に適用 ///////////////////////////

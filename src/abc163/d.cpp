@@ -61,7 +61,7 @@ template<class T> using VV = V<V<T>>;
 // }
  
 // type/const
-// #define int ll
+#define int ll
 using ll = long long;
 using ull = unsigned long long;
 using ld = long double;
@@ -154,16 +154,32 @@ mint combination(ull s, ull r) {
 }
 
 
-void main() {
+signed main() {
 	INIT;
 
+VAR(ll,n,k);
+
+//以下計算間に合わない
+// mint ans =0;
+// OUT(combination(3,1)) BR   
+// V<mint> comb;
+// FOR(i,1,n+1)
+// 	comb.PB(combination(n+1,i));  // 1 〜 N+1 の combinationの計算した結果
+// FOR(i,k,n+1){
+// 	ans += comb[i-1] - ( pow((n - i),2) - (n -i ));
+// }
+// OUT(ans)
+
+mint ans =0;
+
+FOR(i,k,n+2){
+	ans += i* n - i * (i  -1) +1;
+}
+
+OUT(ans)
 
 
-// VEC(ll,v,n);
-// MAT(ll,c,n,m);
-
-
- return;
+ return 0;
 }
 
 //////////////////////////  数値、Vectorなど配列に適用 ///////////////////////////

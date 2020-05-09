@@ -61,7 +61,6 @@ template<class T> using VV = V<V<T>>;
 // }
  
 // type/const
-// #define int ll
 using ll = long long;
 using ull = unsigned long long;
 using ld = long double;
@@ -154,16 +153,37 @@ mint combination(ull s, ull r) {
 }
 
 
-void main() {
+signed main() {
 	INIT;
 
+VAR(ll,x)
 
+V<ll> v = {0, 1, 32, 243, 1024, 3125, 7776, 16807, 32768, 59049, 100000, 161051, 248832, 371293, 537824, 759375, 1048576, 1419857, 1889568, 2476099, 3200000, 4084101, 5153632, 6436343, 7962624, 9765625};
+V<ll> out;
+
+// OUT(pow(120,5) -pow(119,5)) BR;
+// OUT(pow(1000,5) )BR;
+// OUT(pow(999,5) )BR;
+
+
+FOR(a,-1000,1000){
+	ll a5 = pow(a,5);
+	FOR(b,-1000,1000){
+		ll b5 = pow(b,5);
+		if(a5-b5 == x) {
+			OUT(a) SP; OUT(b)
+			return 0;
+		}
+	}
+}
+
+// OUT(out)
 
 // VEC(ll,v,n);
 // MAT(ll,c,n,m);
 
 
- return;
+ return 0;
 }
 
 //////////////////////////  数値、Vectorなど配列に適用 ///////////////////////////

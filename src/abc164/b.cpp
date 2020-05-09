@@ -61,7 +61,7 @@ template<class T> using VV = V<V<T>>;
 // }
  
 // type/const
-// #define int ll
+#define int ll
 using ll = long long;
 using ull = unsigned long long;
 using ld = long double;
@@ -154,16 +154,32 @@ mint combination(ull s, ull r) {
 }
 
 
-void main() {
+signed main() {
 	INIT;
 
+VAR(ll,a,b,c,d)
 
+while(a >= 0 && c >= 0){
+	c -= b;
+	if(c <= 0){
+		cYes;
+		break;
+	}
+	a -= d;
+	if(a <= 0){
+		cNo;
+		break;
+	}	
+}
+// if(a >= 0)
+// 	cYes;
+// else	cNo;
 
 // VEC(ll,v,n);
 // MAT(ll,c,n,m);
 
 
- return;
+ return 0;
 }
 
 //////////////////////////  数値、Vectorなど配列に適用 ///////////////////////////

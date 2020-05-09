@@ -61,7 +61,7 @@ template<class T> using VV = V<V<T>>;
 // }
  
 // type/const
-// #define int ll
+#define int ll
 using ll = long long;
 using ull = unsigned long long;
 using ld = long double;
@@ -153,17 +153,47 @@ mint combination(ull s, ull r) {
   return dividend / divisor;
 }
 
+ll n,m,q;
+V<ll> a;
+V<ll> b;
+V<ll> c;
+V<ll> d;
+ll ans=0;
 
-void main() {
+void dfs( V<ll> A ){
+	if(A.size() ==n +1){
+		ll cnt=0;
+		REP(i,q){
+			if(A[b[i]] - A[a[i]] == c[i]){
+				cnt += d[i];
+			}
+		}
+		ans = max(ans,cnt);
+		return;
+	}
+	A.push_back(A.back());
+	while(A.back() <= m){
+		dfs(A);
+		A.back()++;
+	}
+}
+
+signed main() {
 	INIT;
 
+cin >> n >> m >> q;
+a = b = c = d = V<ll>(q);
+
+REP(i,q){
+	cin >> a[i] >> b[i] >> c[i] >> d[i];
+}
+ll sum =0;
+
+dfs(V<ll>(1,1));
+cout << ans;
 
 
-// VEC(ll,v,n);
-// MAT(ll,c,n,m);
-
-
- return;
+ return 0;
 }
 
 //////////////////////////  数値、Vectorなど配列に適用 ///////////////////////////
