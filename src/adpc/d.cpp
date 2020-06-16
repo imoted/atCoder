@@ -43,7 +43,7 @@ template<typename First, typename...Rest>void MACRO_OUT(const First first, const
 #define REP(w, n) for(int w=0;w<int(n);++w)
 #define RREP(w, n) for(int w=int(n)-1;w>=0;--w)
 #define IN(a, x, b) (a<=x && x<b)
-template<class T> inline T CHMAX(T & a, const T b) { return a = (a < b) ? b : a; }
+template<class T> inline T CHMAX(T& a, const T b) { return a = (a < b) ? b : a; }
 template<class T> inline T CHMIN(T& a, const T b) { return a = (a > b) ? b : a; }
 
 #define PB push_back // 配列の最後にappendする
@@ -142,9 +142,45 @@ struct ModInt{
 };
 typedef ModInt<MOD> mint;
 
+mint combination(ull s, ull r) {
+  if ( r * 2 > s ) r = s - r;
+  mint dividend = 1;
+  mint divisor  = 1;
+  for ( ull i = 1; i <= r; ++i ) {
+    dividend *= (s-i+1);
+    divisor  *= i;
+  }
+  return dividend / divisor;
+}
+
 
 int main() {
 	INIT;
+
+VAR(int,N,W)
+V<int> w(N);
+V<int> v(N);
+V<V<int>> dp(N+1,V<int>(W+1));
+
+REP(i,N)
+	cin >> w[i] >> v[i];
+
+REP(i,N){
+	REP(j,W+1){ // 重さが W を超えないように選んだときの、価値の総和の最大値
+		if(j - w[i] >= 0){ // i 番目の品物を選ぶ場合
+			CHMAX(dp[i+1][j], dp[i][j - w[i]] + v[i]);
+		}
+		// i 番目の品物を選ばない場合
+		CHMAX(dp[i+1][j], dp[i][j]);
+	}
+}
+OUT(dp[N][W])
+
+
+
+// VEC(ll,v,n);
+// MAT(ll,c,n,m);
+
 
 return 0;
 }
@@ -347,26 +383,6 @@ return 0;
 //   }
 
 // 1 << (h-1)   2 の h乗の表現
-
-
-// mint combination(ull s, ull r) {
-//   if ( r * 2 > s ) r = s - r;
-//   mint dividend = 1;
-//   mint divisor  = 1;
-//   for ( ull i = 1; i <= r; ++i ) {
-//     dividend *= (s-i+1);
-//     divisor  *= i;
-//   }
-//   return dividend / divisor;
-// }
-
-// pairの定義方法
-// PAIR ans(9999,-1);
-// OUT(ans.first);
-
-// pair同士の比較　第一引数がまず比較される。
-// PAIR ans = min(PAIR(3,4),PAIR(2,3));
-// OUT(ans.second)
 
 ////////////////////////////////   文字列に対して適用   //////////////////////////
 

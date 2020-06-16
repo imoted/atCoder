@@ -142,9 +142,114 @@ struct ModInt{
 };
 typedef ModInt<MOD> mint;
 
+mint combination(ull s, ull r) {
+  if ( r * 2 > s ) r = s - r;
+  mint dividend = 1;
+  mint divisor  = 1;
+  for ( ull i = 1; i <= r; ++i ) {
+    dividend *= (s-i+1);
+    divisor  *= i;
+  }
+  return dividend / divisor;
+}
+
+V<ll> n_arr;
+V<V<ll>> a_arr;
+V<int> product ={2,3,5};
+V<int> dp(int(2e9) +1, INFINT);
+
+ll dfs(ll coin, ll num, ll n, V<ll> a){
+	// ll res;
+	if(dp[num] != INFINT)
+		return dp[num];
+	if(num == n)
+		return INFINT;
+		// res = coin;
+	if(num >= (2 *n))
+		dp[num] = coin;
+		return INFINT;
+		// res = INFINT
+	// if(num == DP){
+	// }
+	REP(i,5){
+		ll coin_tmp;
+		ll num_tmp;
+		if(i < 3)
+			// coin += a[i];
+			coin_tmp = coin + a[i];
+		else
+			// coin += a[3];
+			coin_tmp = coin + a[3];
+		if(i < 3)
+			// num *= product[i];
+			num_tmp = num * product[i];
+		else if(i == 3)
+			// num += 1;
+			num_tmp = num + 1;
+		else
+			// num -= 1;
+			num_tmp = num -1;
+		// coin = min(coin ,dfs(coin, num, n ,a ));
+		coin = min(coin ,dfs(coin_tmp, num_tmp, n ,a ));
+	}
+	dp[num] = coin;
+	return coin;
+}
 
 int main() {
 	INIT;
+
+VAR(int,t)
+REP(i,t){
+	// V<int> a(t);
+	// V<int> b(t);
+	// V<int> c(t);
+	// V<int> d(t);
+	// cin >> n[i] >> a[i] >> b[i] >> c[i] >> d[i];
+	// V<V<ll>> a(t, V<ll>(4));
+	// cin >> n[i] >> a[i][0] >> a[i][1] >> a[i][2] >> a[i][3];
+	ll n,a,b,c,d;
+	cin >> n >> a >> b >> c >> d;
+	n_arr.PB(n);
+	V<ll> tmp_v;
+	tmp_v.PB(a);
+	tmp_v.PB(b);
+	tmp_v.PB(c);
+	tmp_v.PB(d);
+	a_arr.PB(tmp_v);
+}
+
+REP(i,t){
+	OUT(dfs(a_arr[i][3],1,n_arr[i],a_arr[i] )) 
+	BR;
+}
+
+
+// queue<ll> que;
+// REP(i,t){
+// 	que.push(a_arr[i][3]);
+// 	ll coin =0;
+// 	ll num =0;
+// 	while(!que.empty()){
+// 		if(num == n_arr[i]){
+// 			break;
+// 		}
+// 		ll now = que.front() ; que.pop(); // 
+// 		REP(j,5){
+// 			coin += a_arr[i][j];
+// 			if(j < 3){
+// 				num *= product[j];
+// 			}
+// 			else if(j ==3){
+// 				num += 1;
+// 			}
+// 			else if(j ==4){
+// 				num -= 1;
+// 			}
+// 			que.push( );
+// 		}
+// 	}
+// }
 
 return 0;
 }
@@ -347,26 +452,6 @@ return 0;
 //   }
 
 // 1 << (h-1)   2 の h乗の表現
-
-
-// mint combination(ull s, ull r) {
-//   if ( r * 2 > s ) r = s - r;
-//   mint dividend = 1;
-//   mint divisor  = 1;
-//   for ( ull i = 1; i <= r; ++i ) {
-//     dividend *= (s-i+1);
-//     divisor  *= i;
-//   }
-//   return dividend / divisor;
-// }
-
-// pairの定義方法
-// PAIR ans(9999,-1);
-// OUT(ans.first);
-
-// pair同士の比較　第一引数がまず比較される。
-// PAIR ans = min(PAIR(3,4),PAIR(2,3));
-// OUT(ans.second)
 
 ////////////////////////////////   文字列に対して適用   //////////////////////////
 

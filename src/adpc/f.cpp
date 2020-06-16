@@ -142,9 +142,58 @@ struct ModInt{
 };
 typedef ModInt<MOD> mint;
 
+mint combination(ull s, ull r) {
+  if ( r * 2 > s ) r = s - r;
+  mint dividend = 1;
+  mint divisor  = 1;
+  for ( ull i = 1; i <= r; ++i ) {
+    dividend *= (s-i+1);
+    divisor  *= i;
+  }
+  return dividend / divisor;
+}
+
 
 int main() {
 	INIT;
+
+VAR(string,s,t)
+const int slen = s.size();
+const int tlen = t.size();
+s = '0' +s;
+t = '0' +t;
+
+// int dp[slen][tlen];// dpの配列のメモリが確保できない？
+
+V<V<int>> dp(slen +1,V<int>(tlen +1));
+
+FOR(i,1,slen+1){
+	FOR(j,1,tlen+1){
+		if(s[i]==t[j])dp[i][j]=dp[i-1][j-1]+1;
+		else dp[i][j]=max(dp[i-1][j],dp[i][j-1]);
+	}
+}
+
+string ans;
+
+int len=dp[slen ][tlen ];
+int i=slen ;
+int j=tlen ;
+while(len>0){
+	if(s[i]==t[j]){
+		ans += s[i];
+		i--;
+		j--;
+		len--;
+	}else if(dp[i][j]==dp[i-1][j]){
+		i--;
+	}else{
+		j--;
+	}
+}
+
+reverse(ans.begin() ,ans.end());
+OUT(ans)
 
 return 0;
 }
@@ -347,26 +396,6 @@ return 0;
 //   }
 
 // 1 << (h-1)   2 の h乗の表現
-
-
-// mint combination(ull s, ull r) {
-//   if ( r * 2 > s ) r = s - r;
-//   mint dividend = 1;
-//   mint divisor  = 1;
-//   for ( ull i = 1; i <= r; ++i ) {
-//     dividend *= (s-i+1);
-//     divisor  *= i;
-//   }
-//   return dividend / divisor;
-// }
-
-// pairの定義方法
-// PAIR ans(9999,-1);
-// OUT(ans.first);
-
-// pair同士の比較　第一引数がまず比較される。
-// PAIR ans = min(PAIR(3,4),PAIR(2,3));
-// OUT(ans.second)
 
 ////////////////////////////////   文字列に対して適用   //////////////////////////
 

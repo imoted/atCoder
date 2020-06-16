@@ -142,9 +142,62 @@ struct ModInt{
 };
 typedef ModInt<MOD> mint;
 
+mint combination(ull s, ull r) {
+  if ( r * 2 > s ) r = s - r;
+  mint dividend = 1;
+  mint divisor  = 1;
+  for ( ull i = 1; i <= r; ++i ) {
+    dividend *= (s-i+1);
+    divisor  *= i;
+  }
+  return dividend / divisor;
+}
+
+const int D =60;
+const int MAX_N = 200005;
 
 int main() {
 	INIT;
+
+VAR(ll,n,k)
+VEC(int,a,n)
+REP(i,n){
+	a[i]--;
+}
+
+V<V<int>> vv(D,V<int>(MAX_N));
+
+REP(i,n){
+	vv[0][i] = a[i];
+}
+int i=1;
+int last_i =0;
+REP(i,D-1 ){
+	REP(j,n){
+		vv[i +1][j] = vv[i][vv[i][j]];
+	}
+}
+
+// V<int> d;
+
+int v=0;
+i=0;
+for(i =D -1; i >=0 ;i--){
+	// if(k >> 1 == 0){
+	// 	break;
+	// }
+	// if(k >> 1 & 1){
+	// 	d.PB(pow(2,i));
+	// }
+	// i++;
+	ll l = 1ll <<i;
+	if(l <=k){
+		v = vv[i][v];
+		k -= l;
+	}
+}
+
+OUT(v +1)
 
 return 0;
 }
@@ -159,13 +212,6 @@ return 0;
 //     cout << a.back()<< '\n';   //末尾を参照
 //     a.push_back(10);  //末尾に要素を追加
 //     a.pop_back();   //末尾の要素を削除
-
-// listに対するfor文　書き方
-// n = {{0,1,2},{3,4,5}}
-// for(int i : n[0]){
-// 	OUT(i)
-// }
-// 出力は 0,1,2 
 
 //"a" を b回繰り返すstringで初期化
 // std::string s(b, "a");  
@@ -347,26 +393,6 @@ return 0;
 //   }
 
 // 1 << (h-1)   2 の h乗の表現
-
-
-// mint combination(ull s, ull r) {
-//   if ( r * 2 > s ) r = s - r;
-//   mint dividend = 1;
-//   mint divisor  = 1;
-//   for ( ull i = 1; i <= r; ++i ) {
-//     dividend *= (s-i+1);
-//     divisor  *= i;
-//   }
-//   return dividend / divisor;
-// }
-
-// pairの定義方法
-// PAIR ans(9999,-1);
-// OUT(ans.first);
-
-// pair同士の比較　第一引数がまず比較される。
-// PAIR ans = min(PAIR(3,4),PAIR(2,3));
-// OUT(ans.second)
 
 ////////////////////////////////   文字列に対して適用   //////////////////////////
 

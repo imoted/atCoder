@@ -142,9 +142,32 @@ struct ModInt{
 };
 typedef ModInt<MOD> mint;
 
+mint combination(ull s, ull r) {
+  if ( r * 2 > s ) r = s - r;
+  mint dividend = 1;
+  mint divisor  = 1;
+  for ( ull i = 1; i <= r; ++i ) {
+    dividend *= (s-i+1);
+    divisor  *= i;
+  }
+  return dividend / divisor;
+}
+
 
 int main() {
 	INIT;
+
+VAR(ll,a)
+VAR(ld,b)
+int c = b *100 +0.5; // 0.5を足すのは、切り捨てされる少数点を救うため
+
+printf("%lld\n",a * c / 100);
+// long long intで64bit整数値を格納した際に、その値をprintfで表示させる方法です。
+// 普通に%dや%xで表示させようとしても、下位32bit分しか見てくれないので正しい値を表示させる事が出来ません
+
+// ll ans =  (double)(a * c) / 100.0;
+// OUT(ans)  //これだと桁落ちする
+// cout << std::fixed << ans << endl;
 
 return 0;
 }
@@ -347,26 +370,6 @@ return 0;
 //   }
 
 // 1 << (h-1)   2 の h乗の表現
-
-
-// mint combination(ull s, ull r) {
-//   if ( r * 2 > s ) r = s - r;
-//   mint dividend = 1;
-//   mint divisor  = 1;
-//   for ( ull i = 1; i <= r; ++i ) {
-//     dividend *= (s-i+1);
-//     divisor  *= i;
-//   }
-//   return dividend / divisor;
-// }
-
-// pairの定義方法
-// PAIR ans(9999,-1);
-// OUT(ans.first);
-
-// pair同士の比較　第一引数がまず比較される。
-// PAIR ans = min(PAIR(3,4),PAIR(2,3));
-// OUT(ans.second)
 
 ////////////////////////////////   文字列に対して適用   //////////////////////////
 

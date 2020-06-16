@@ -142,12 +142,48 @@ struct ModInt{
 };
 typedef ModInt<MOD> mint;
 
-
-int main() {
-	INIT;
-
-return 0;
+mint combination(ull s, ull r) {
+  if ( r * 2 > s ) r = s - r;
+  mint dividend = 1;
+  mint divisor  = 1;
+  for ( ull i = 1; i <= r; ++i ) {
+    dividend *= (s-i+1);
+    divisor  *= i;
+  }
+  return dividend / divisor;
 }
+
+int n;
+int d;
+ 
+int expo[10];
+map<int,double> dp[105];
+ 
+double rec(int n,int d){
+	if(d==1) return 1;
+	if(n==0) return 0;
+	if(dp[n].count(d)) return dp[n][d];
+	double &res=dp[n][d];
+	res=0;
+ 
+	FOR(i,1,7){
+		if(d%i==0) res+=rec(n-1,d/i);
+		else{
+			if(i==4 && d%2==0) res+=rec(n-1,d/2);
+			else if(i==6 && d%3==0) res+=rec(n-1,d/3);
+			else if(i==6 && d%2==0) res+=rec(n-1,d/2);
+			else res+=rec(n-1,d);
+		}
+	}
+	res/=6.0;
+	return res;
+}
+ 
+int main(){
+	cin>>n>>d;
+	printf("%.10f\n",rec(n,d));
+	return 0; 
+} 
 
 //////////////////////////  数値、Vectorなど配列に適用 ///////////////////////////
 
@@ -347,26 +383,6 @@ return 0;
 //   }
 
 // 1 << (h-1)   2 の h乗の表現
-
-
-// mint combination(ull s, ull r) {
-//   if ( r * 2 > s ) r = s - r;
-//   mint dividend = 1;
-//   mint divisor  = 1;
-//   for ( ull i = 1; i <= r; ++i ) {
-//     dividend *= (s-i+1);
-//     divisor  *= i;
-//   }
-//   return dividend / divisor;
-// }
-
-// pairの定義方法
-// PAIR ans(9999,-1);
-// OUT(ans.first);
-
-// pair同士の比較　第一引数がまず比較される。
-// PAIR ans = min(PAIR(3,4),PAIR(2,3));
-// OUT(ans.second)
 
 ////////////////////////////////   文字列に対して適用   //////////////////////////
 

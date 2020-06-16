@@ -142,9 +142,66 @@ struct ModInt{
 };
 typedef ModInt<MOD> mint;
 
+mint combination(ull s, ull r) {
+  if ( r * 2 > s ) r = s - r;
+  mint dividend = 1;
+  mint divisor  = 1;
+  for ( ull i = 1; i <= r; ++i ) {
+    dividend *= (s-i+1);
+    divisor  *= i;
+  }
+  return dividend / divisor;
+}
+
+bool IsPrime(int num)
+{
+    if (num < 2) return false;
+    else if (num == 2) return true;
+    else if (num % 2 == 0) return false; // 偶数はあらかじめ除く
+
+    double sqrtNum = sqrt(num);
+    for (int i = 3; i <= sqrtNum; i += 2)
+    {
+        if (num % i == 0)
+        {
+            // 素数ではない
+            return false;
+        }
+    }
+
+    // 素数である
+    return true;
+}
 
 int main() {
 	INIT;
+
+VAR(ll,n)
+
+// vector<int> x(n + 1);
+map<ll,int> mp;
+ll num = n; // 素因数分解する変数num 
+
+for (ll i = 2; i*i <= n; i++) {
+	while (num%i == 0) { // 素数で割り切れなくなるまで割っていく
+		num /= i;
+		mp[i]++;
+	}
+}
+if(num != 1) mp[num]++;
+
+int ans =0;
+for(auto p : mp){
+	int x = p.second;
+	int b =1;
+	while(b <=x ){
+		x -= b;
+		b++;
+		++ans;
+	}
+}
+OUT(ans)
+
 
 return 0;
 }
@@ -347,26 +404,6 @@ return 0;
 //   }
 
 // 1 << (h-1)   2 の h乗の表現
-
-
-// mint combination(ull s, ull r) {
-//   if ( r * 2 > s ) r = s - r;
-//   mint dividend = 1;
-//   mint divisor  = 1;
-//   for ( ull i = 1; i <= r; ++i ) {
-//     dividend *= (s-i+1);
-//     divisor  *= i;
-//   }
-//   return dividend / divisor;
-// }
-
-// pairの定義方法
-// PAIR ans(9999,-1);
-// OUT(ans.first);
-
-// pair同士の比較　第一引数がまず比較される。
-// PAIR ans = min(PAIR(3,4),PAIR(2,3));
-// OUT(ans.second)
 
 ////////////////////////////////   文字列に対して適用   //////////////////////////
 

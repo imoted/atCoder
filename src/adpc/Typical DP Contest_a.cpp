@@ -142,9 +142,39 @@ struct ModInt{
 };
 typedef ModInt<MOD> mint;
 
+mint combination(ull s, ull r) {
+  if ( r * 2 > s ) r = s - r;
+  mint dividend = 1;
+  mint divisor  = 1;
+  for ( ull i = 1; i <= r; ++i ) {
+    dividend *= (s-i+1);
+    divisor  *= i;
+  }
+  return dividend / divisor;
+}
+
 
 int main() {
 	INIT;
+
+VAR(int,n)
+// VEC(int,p,n)
+ll ans=0;
+int bitdp;
+V<int> dp(1e5);
+
+dp[0] = 1;
+int sum=0;
+
+for(int i=0;i<n;i++) {
+	int x;
+	cin >> x;
+	for(int j=sum;j>=0;j--)
+		dp[j+x]|=dp[j];
+	sum += x;
+}
+	for(int i=0;i<=sum;i++) ans+=dp[i];
+	printf("%d\n",ans);
 
 return 0;
 }
@@ -347,26 +377,6 @@ return 0;
 //   }
 
 // 1 << (h-1)   2 の h乗の表現
-
-
-// mint combination(ull s, ull r) {
-//   if ( r * 2 > s ) r = s - r;
-//   mint dividend = 1;
-//   mint divisor  = 1;
-//   for ( ull i = 1; i <= r; ++i ) {
-//     dividend *= (s-i+1);
-//     divisor  *= i;
-//   }
-//   return dividend / divisor;
-// }
-
-// pairの定義方法
-// PAIR ans(9999,-1);
-// OUT(ans.first);
-
-// pair同士の比較　第一引数がまず比較される。
-// PAIR ans = min(PAIR(3,4),PAIR(2,3));
-// OUT(ans.second)
 
 ////////////////////////////////   文字列に対して適用   //////////////////////////
 

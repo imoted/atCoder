@@ -146,6 +146,24 @@ typedef ModInt<MOD> mint;
 int main() {
 	INIT;
 
+VAR(int,n,q)
+V<int> a(n);
+V<int> b(n);
+// V<int> c(q);
+// V<int> d(q);
+int c;
+int d;
+REP(i,n)
+	cin >> a[i] >> b[i];
+
+
+REP(i,q){
+	// cin >> c[i] >> d[i];
+	cin >> c >> d;
+	
+
+
+}
 return 0;
 }
 
@@ -360,13 +378,6 @@ return 0;
 //   return dividend / divisor;
 // }
 
-// pairの定義方法
-// PAIR ans(9999,-1);
-// OUT(ans.first);
-
-// pair同士の比較　第一引数がまず比較される。
-// PAIR ans = min(PAIR(3,4),PAIR(2,3));
-// OUT(ans.second)
 
 ////////////////////////////////   文字列に対して適用   //////////////////////////
 

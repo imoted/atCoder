@@ -142,9 +142,88 @@ struct ModInt{
 };
 typedef ModInt<MOD> mint;
 
+mint combination(ull s, ull r) {
+  if ( r * 2 > s ) r = s - r;
+  mint dividend = 1;
+  mint divisor  = 1;
+  for ( ull i = 1; i <= r; ++i ) {
+    dividend *= (s-i+1);
+    divisor  *= i;
+  }
+  return dividend / divisor;
+}
+
+const int MAX_W = 18e5;
+const int MAX_L = 1e5;
 
 int main() {
 	INIT;
+
+// VEC(ll,v,n);
+// MAT(ll,c,n,m);
+
+VAR(int,n)
+V<int> val(n);
+V<int> w(n);
+FOR(i,1,n+1)
+	cin >> val[i] >> w[i];
+
+VAR(int,q)
+V<int> v(q);
+V<int> l(q);
+REP(i,q)
+	cin >> v[i] >> l[i];
+
+// 以下はTLE
+// 以下が、最大 10e5
+// REP(i,q){
+// 	int dev = v[i];
+// 	V<int> dev_v;
+// 	while(dev !=1){
+// 		dev_v.PB(dev);
+// 		dev /= 2;
+// 	}
+// 	dev_v.PB(1);
+// 	int size = dev_v.size();
+// 	// sort(dev_v.begin(),dev_v.end());
+// 	V<V<int>> dp(size +1,V<int>(l[i] +1));
+// 	// if(size > 1){
+// 	REP(k,size){
+// 		// 以下が、最大 10e5
+// 		REP(j,l[i]+1){ // 重さが l[i] を超えないように選んだときの、価値の総和の最大値
+// 			if(j - w[dev_v[k]] >= 0){ // k 番目の品物を選ぶ場合
+// 				CHMAX(dp[k+1][j], dp[k][j - w[dev_v[k]]] + val[dev_v[k]]);
+// 			}
+// 			// i 番目の品物を選ばない場合
+// 			CHMAX(dp[k+1][j], dp[k][j]);
+// 		}
+// 	}
+// 	OUT(dp[size ][l[i] ]) BR;
+// }
+
+V<V<int>> dp(n+1,V<int>(MAX_L+1));
+
+REP(i, ){
+	REP(j,MAX_L){ // 重さが j を超えないように選んだときの、価値の総和の最大値
+		if(j - w[i] >= 0){ // i 番目の品物を選ぶ場合
+			CHMAX(dp[i+1][j], dp[i][j - w[i]] + val[i]);
+		}
+		// i 番目の品物を選ばない場合
+		CHMAX(dp[i+1][j], dp[i][j]);
+	}
+}
+
+REP(i,q){
+	int dev = v[i];
+	V<int> dev_v;
+	while(dev !=1){
+		dev_v.PB(dev);
+		dev /= 2;
+	}
+	dev_v.PB(1);
+	OUT(dp[size ][l[i] ]) BR;
+}
+
 
 return 0;
 }
@@ -347,26 +426,6 @@ return 0;
 //   }
 
 // 1 << (h-1)   2 の h乗の表現
-
-
-// mint combination(ull s, ull r) {
-//   if ( r * 2 > s ) r = s - r;
-//   mint dividend = 1;
-//   mint divisor  = 1;
-//   for ( ull i = 1; i <= r; ++i ) {
-//     dividend *= (s-i+1);
-//     divisor  *= i;
-//   }
-//   return dividend / divisor;
-// }
-
-// pairの定義方法
-// PAIR ans(9999,-1);
-// OUT(ans.first);
-
-// pair同士の比較　第一引数がまず比較される。
-// PAIR ans = min(PAIR(3,4),PAIR(2,3));
-// OUT(ans.second)
 
 ////////////////////////////////   文字列に対して適用   //////////////////////////
 

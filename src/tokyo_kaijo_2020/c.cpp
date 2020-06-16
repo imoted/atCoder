@@ -142,9 +142,62 @@ struct ModInt{
 };
 typedef ModInt<MOD> mint;
 
+mint combination(ull s, ull r) {
+  if ( r * 2 > s ) r = s - r;
+  mint dividend = 1;
+  mint divisor  = 1;
+  for ( ull i = 1; i <= r; ++i ) {
+    dividend *= (s-i+1);
+    divisor  *= i;
+  }
+  return dividend / divisor;
+}
+
 
 int main() {
 	INIT;
+
+
+// MAT(ll,c,n,m);
+
+VAR(int,n,k)
+VEC(int,a,n)
+
+auto devide = [&](int d,int num){
+
+};
+
+int pos =0;
+// REP(i,n){ //以下の操作が O(N)になってしまう。
+	// if(pos < i){  
+	// 	if(a[i] - i <= pos)
+	// 	b[i]++;
+	// }
+	// else if(pos > i){
+	// 	if(a[i] + i >= pos)
+	// 	b[i]++;
+	// }
+	// b[i]++;  // 自分の電球を加算
+// }
+
+
+REP(j,k){
+	// 以下の累積和を取るアルゴリズムが必須
+	V<int> b(n +1,0);
+	REP(i,n){
+		int l=max(0,i-a[i]);
+		int r=min(n-1,i+a[i]);
+		b[l]++;
+		if(r+1<n) b[r+1]--;
+	}
+	REP(i,n) b[i]+=b[i-1];
+	b.pop_back(); // 末尾要素を削除する。
+	if(a ==b){break;}
+	a =b;
+}
+REP(i,n){
+	OUT(a[i]) SP;
+}
 
 return 0;
 }
@@ -347,26 +400,6 @@ return 0;
 //   }
 
 // 1 << (h-1)   2 の h乗の表現
-
-
-// mint combination(ull s, ull r) {
-//   if ( r * 2 > s ) r = s - r;
-//   mint dividend = 1;
-//   mint divisor  = 1;
-//   for ( ull i = 1; i <= r; ++i ) {
-//     dividend *= (s-i+1);
-//     divisor  *= i;
-//   }
-//   return dividend / divisor;
-// }
-
-// pairの定義方法
-// PAIR ans(9999,-1);
-// OUT(ans.first);
-
-// pair同士の比較　第一引数がまず比較される。
-// PAIR ans = min(PAIR(3,4),PAIR(2,3));
-// OUT(ans.second)
 
 ////////////////////////////////   文字列に対して適用   //////////////////////////
 

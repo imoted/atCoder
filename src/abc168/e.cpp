@@ -142,12 +142,92 @@ struct ModInt{
 };
 typedef ModInt<MOD> mint;
 
+mint combination(ull s, ull r) {
+  if ( r * 2 > s ) r = s - r;
+  mint dividend = 1;
+  mint divisor  = 1;
+  for ( ull i = 1; i <= r; ++i ) {
+    dividend *= (s-i+1);
+    divisor  *= i;
+  }
+  return dividend / divisor;
+}
+
 
 int main() {
 	INIT;
 
+// n 3
+
+// a b
+// 1 2
+// -1 1
+// 2 -1
+
+// 以下ではダメ。　式変形が大事。
+// a[i] * a[j] + b[i] * b[j] != 0
+// 上記を計算し、抽出する。　全通りから、上記を減算して、出力
+// 上記条件を探る
+
+// a[i] * a[j] + b[i] * b[j] != 0
+// 最小公約数を先に計算　
+// gcd(a, b)
+// それでa , bを割る
+// その後、
+
+// VEC(ll,v,n);
+// MAT(ll,c,n,m);
+
+VAR(int,n);
+V<ll> a(n);
+V<ll> b(n);
+V<ll> d(n);
+int c;
+int zero =0;
+
+REP(i,n){
+	cin >> a[i] >> b[i];
+	if(a[i] == && b[i] ==0){
+		zero++;
+		continue;
+	}
+	c = gcd(a[i], b[i]);
+	if(c != 0){
+		a[i] /= c;
+		b[i] /= c;
+	}
+	if(b[i] !=0)
+		c[i] = a[i] / b[i];
+	// d[i] = a[i] * b[i];
+}
+
+// sort(d.begin(),d.end());
+// ll cnt =0;
+
+REP(i,n){
+
+	// if(d[i] == d[i+1]){
+	// 	if((a[i] == b[i+1] && a[i+1] == - b[i]) || (a[i] == - b[i+1] && a[i+1] == b[i]))
+	// 		cnt++;
+	// }
+}
+
+OUT(pow(2,n) -1 - cnt)
+
 return 0;
 }
+
+// 10  1024 -4 -> 1019xxxx -> 479
+// 3 2                   6
+// 3 2                   6
+// -1 1                  -1
+// 2 -1                  -2
+// -3 -9   -1 -3         3
+// -8 12   -2 3          -6
+// 7 7   1  1            1
+// 8 1                   8
+// 8 2   4 1             4
+// 8 4   2 1             2
 
 //////////////////////////  数値、Vectorなど配列に適用 ///////////////////////////
 
@@ -159,13 +239,6 @@ return 0;
 //     cout << a.back()<< '\n';   //末尾を参照
 //     a.push_back(10);  //末尾に要素を追加
 //     a.pop_back();   //末尾の要素を削除
-
-// listに対するfor文　書き方
-// n = {{0,1,2},{3,4,5}}
-// for(int i : n[0]){
-// 	OUT(i)
-// }
-// 出力は 0,1,2 
 
 //"a" を b回繰り返すstringで初期化
 // std::string s(b, "a");  
@@ -347,26 +420,6 @@ return 0;
 //   }
 
 // 1 << (h-1)   2 の h乗の表現
-
-
-// mint combination(ull s, ull r) {
-//   if ( r * 2 > s ) r = s - r;
-//   mint dividend = 1;
-//   mint divisor  = 1;
-//   for ( ull i = 1; i <= r; ++i ) {
-//     dividend *= (s-i+1);
-//     divisor  *= i;
-//   }
-//   return dividend / divisor;
-// }
-
-// pairの定義方法
-// PAIR ans(9999,-1);
-// OUT(ans.first);
-
-// pair同士の比較　第一引数がまず比較される。
-// PAIR ans = min(PAIR(3,4),PAIR(2,3));
-// OUT(ans.second)
 
 ////////////////////////////////   文字列に対して適用   //////////////////////////
 

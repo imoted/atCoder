@@ -142,9 +142,46 @@ struct ModInt{
 };
 typedef ModInt<MOD> mint;
 
+mint combination(ull s, ull r) {
+  if ( r * 2 > s ) r = s - r;
+  mint dividend = 1;
+  mint divisor  = 1;
+  for ( ull i = 1; i <= r; ++i ) {
+    dividend *= (s-i+1);
+    divisor  *= i;
+  }
+  return dividend / divisor;
+}
+
 
 int main() {
 	INIT;
+
+VAR(string,n)
+// OUT(n[0])
+// OUT(n.size() -1)
+int tmp = n.size() -1;
+// OUT(n[tmp])
+switch(n[tmp]){
+	case '2':
+	case '4':
+	case '5':
+	case '7':
+	case '9':
+		OUT("hon")
+		break;
+	case '0':
+	case '1':
+	case '6':
+	case '8':
+		OUT("pon")
+		break;
+	case '3':
+		OUT("bon")
+		break;		
+}
+
+
 
 return 0;
 }
@@ -159,13 +196,6 @@ return 0;
 //     cout << a.back()<< '\n';   //末尾を参照
 //     a.push_back(10);  //末尾に要素を追加
 //     a.pop_back();   //末尾の要素を削除
-
-// listに対するfor文　書き方
-// n = {{0,1,2},{3,4,5}}
-// for(int i : n[0]){
-// 	OUT(i)
-// }
-// 出力は 0,1,2 
 
 //"a" を b回繰り返すstringで初期化
 // std::string s(b, "a");  
@@ -347,26 +377,6 @@ return 0;
 //   }
 
 // 1 << (h-1)   2 の h乗の表現
-
-
-// mint combination(ull s, ull r) {
-//   if ( r * 2 > s ) r = s - r;
-//   mint dividend = 1;
-//   mint divisor  = 1;
-//   for ( ull i = 1; i <= r; ++i ) {
-//     dividend *= (s-i+1);
-//     divisor  *= i;
-//   }
-//   return dividend / divisor;
-// }
-
-// pairの定義方法
-// PAIR ans(9999,-1);
-// OUT(ans.first);
-
-// pair同士の比較　第一引数がまず比較される。
-// PAIR ans = min(PAIR(3,4),PAIR(2,3));
-// OUT(ans.second)
 
 ////////////////////////////////   文字列に対して適用   //////////////////////////
 

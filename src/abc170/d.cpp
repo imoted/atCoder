@@ -146,6 +146,39 @@ typedef ModInt<MOD> mint;
 int main() {
 	INIT;
 
+VAR(int,n)
+VEC(int,a,n)
+// sort(ALL(a)); // 36msec
+map<int,int> mp;
+
+int ans=0;
+
+// 以下TLE & WA たぶん O(N*N)なのでダメ。
+// if(n != 1){
+// 	if(a[0] == a[1])
+// 		ans++;
+// 	REP(i,n){ // O(n)
+// 		REP(j,i){ // O(N-1)
+// 			if(a[i] % a[j] == 0){
+// 				ans++;
+// 				break;
+// 			}
+// 		}
+// 	}
+// 	OUT(n - ans)
+// }
+// else
+// {
+// 	OUT(1)
+// }
+
+REP(i,n){
+	
+
+}
+
+
+
 return 0;
 }
 
@@ -347,26 +380,6 @@ return 0;
 //   }
 
 // 1 << (h-1)   2 の h乗の表現
-
-
-// mint combination(ull s, ull r) {
-//   if ( r * 2 > s ) r = s - r;
-//   mint dividend = 1;
-//   mint divisor  = 1;
-//   for ( ull i = 1; i <= r; ++i ) {
-//     dividend *= (s-i+1);
-//     divisor  *= i;
-//   }
-//   return dividend / divisor;
-// }
-
-// pairの定義方法
-// PAIR ans(9999,-1);
-// OUT(ans.first);
-
-// pair同士の比較　第一引数がまず比較される。
-// PAIR ans = min(PAIR(3,4),PAIR(2,3));
-// OUT(ans.second)
 
 ////////////////////////////////   文字列に対して適用   //////////////////////////
 
