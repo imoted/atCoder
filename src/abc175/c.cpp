@@ -26,16 +26,6 @@ template<typename First, typename...Rest>void MACRO_OUT(const First first, const
 #define SPBR(w, n) std::cout<<(w + 1 == n ? '\n' : ' ');
 #define ENDL std::cout<<std::endl;
 #define FLUSH std::cout<<std::flush;
-#define SHOW(dist) {std::cerr << #dist << "\t: " << (dist) << "\n";}
-#define SHOWVECTOR(v) {std::cerr << #v << "\t: ";for(const auto& xxx : v){std::cerr << xxx << " ";}std::cerr << "\n";}
-#define SHOWVECTOR2(v) {std::cerr << #v << "\t:\n";for(const auto& xxx : v){for(const auto& yyy : xxx){std::cerr << yyy << " ";}std::cerr << "\n";}}
-#define SHOWQUEUE(a) {auto tmp(a);std::cerr << #a << "\t: ";while(!tmp.empty()){std::cerr << tmp.front() << " ";tmp.pop();}std::cerr << "\n";}
-#define SHOWSTACK(a) {auto tmp(a);std::cerr << #a << "\t: ";while(!tmp.empty()){std::cerr << tmp.top() << " ";tmp.pop();}std::cerr << "\n";}
-
-#define cYES cout<<"YES"<<endl
-#define cNO cout<<"NO"<<endl
-#define cYes cout<<"Yes"<<endl
-#define cNo cout<<"No"<<endl
 // utility
 #define ALL(a) (a).begin(),(a).end()
 #define FOR(w, a, n) for(int w=(a);w<(n);++w)
@@ -43,25 +33,11 @@ template<typename First, typename...Rest>void MACRO_OUT(const First first, const
 #define REP(w, n) for(int w=0;w<int(n);++w)
 #define RREP(w, n) for(int w=int(n)-1;w>=0;--w)
 #define IN(a, x, b) (a<=x && x<b)
-template<class T> inline T CHMAX(T & a, const T b) { return a = (a < b) ? b : a; }
-template<class T> inline T CHMIN(T& a, const T b) { return a = (a > b) ? b : a; }
-
-#define PB push_back // 配列の最後にappendする
-#define MP make_pair 
-#define FI first
-#define SE second
 
 // test
 template<class T> using V = std::vector<T>;
 template<class T> using VV = V<V<T>>;
  
-// template<typename S, typename T>
-// std::ostream& operator<<(std::ostream& os, std::pair<S, T> p) {
-// 	os << "(" << p.first << ", " << p.second << ")"; return os;
-// }
- 
-// type/const
-// #define int ll
 using ll = long long;
 using ull = unsigned long long;
 using ld = long double;
@@ -81,23 +57,23 @@ template<class ARY, class T> void FILL(std::vector<std::vector<ARY>> & a, const 
 // ------------>8------------------------------------->8------------
 
 
+
 int main() {
 	INIT;
 
-VAR(int,n)
-VEC(int,h,n)
-
-ll dp[100010];
-for (int i = 0; i < 100010; ++i) dp[i] = INFLL;
-
-dp[0] =0;
-dp[1] =abs(h[1] -h[0]);
-
-FOR(i,2,n){
-	CHMIN(dp[i], dp[i-1] +abs(h[i] -h[i-1] ));
-	CHMIN(dp[i], dp[i-2] +abs(h[i] -h[i-2] ));
+VAR(ll,x,k,d)
+if (abs(x) / d <  k ) {  // d*k が llで OFするので要注意
+	if( (k + (abs(x) / d ))%2 == 0 ){
+		OUT(abs(x)%d)
+	}
+	else {
+		OUT(d - abs(x) % d)
+	}
 }
-OUT(dp[n-1])
+else
+{
+	OUT(abs(x) - d*k)
+}
 
 return 0;
 }

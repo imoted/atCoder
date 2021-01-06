@@ -81,23 +81,12 @@ template<class ARY, class T> void FILL(std::vector<std::vector<ARY>> & a, const 
 // ------------>8------------------------------------->8------------
 
 
+
 int main() {
 	INIT;
 
-VAR(int,n)
-VEC(int,h,n)
-
-ll dp[100010];
-for (int i = 0; i < 100010; ++i) dp[i] = INFLL;
-
-dp[0] =0;
-dp[1] =abs(h[1] -h[0]);
-
-FOR(i,2,n){
-	CHMIN(dp[i], dp[i-1] +abs(h[i] -h[i-1] ));
-	CHMIN(dp[i], dp[i-2] +abs(h[i] -h[i-2] ));
-}
-OUT(dp[n-1])
+VAR(ll,a,b,c,d)
+OUT(max(max(max(a*c,a*d), b*c),b*d))
 
 return 0;
 }

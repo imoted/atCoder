@@ -87,16 +87,17 @@ int main() {
 VAR(int,n)
 VEC(int,h,n)
 
-ll dp[100010];
-for (int i = 0; i < 100010; ++i) dp[i] = INFLL;
-
-dp[0] =0;
-dp[1] =abs(h[1] -h[0]);
-
-FOR(i,2,n){
-	CHMIN(dp[i], dp[i-1] +abs(h[i] -h[i-1] ));
-	CHMIN(dp[i], dp[i-2] +abs(h[i] -h[i-2] ));
+V<ll> dp(n+1);
+V<ll> tmp(3);
+dp[0] = 0;
+dp[1] = abs(h[0] - h[1]) + dp[0];
+FOR(i,1,n+1){
+	FOR(j,1,3){
+		tmp[j] = abs(h[i-j] - h[i]) + dp[i-j];
+	}
+	dp[i] = min(tmp[1],tmp[2] );
 }
+	
 OUT(dp[n-1])
 
 return 0;
