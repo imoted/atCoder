@@ -80,68 +80,6 @@ template<class T> void FILL(std::vector<T> & a, const T & val) { for (auto& x : 
 template<class ARY, class T> void FILL(std::vector<std::vector<ARY>> & a, const T & val) { for (auto& b : a) FILL(b, val); }
 // ------------>8------------------------------------->8------------
 
-template<int mod>
-struct ModInt{
-	int x;
-	ModInt():x(0){}
-	ModInt(long long y):x(y>=0?y%mod:(mod-(-y)%mod)%mod){}
-	ModInt &operator+=(const ModInt &p){
-		if((x+=p.x)>=mod)x-=mod;
-		return *this;
-	}
-	ModInt &operator-=(const ModInt &p){
-		if((x+=mod-p.x)>=mod)x-=mod;
-		return *this;
-	}
-	ModInt &operator*=(const ModInt &p){
-		x=(int)(1LL*x*p.x%mod);
-		return *this;
-	}
-	ModInt &operator/=(const ModInt &p){
-		*this*=p.inverse();
-		return *this;
-	}
-	ModInt &operator^=(long long p){
-		ModInt res = 1;
-		for (; p; p >>= 1) {
-			if (p & 1) res *= *this;
-			*this *= *this;
-		}
-		return *this = res;
-	}
-	ModInt operator-()const{return ModInt(-x);}
-	ModInt operator+(const ModInt &p)const{return ModInt(*this)+=p;}
-	ModInt operator-(const ModInt &p)const{return ModInt(*this)-=p;}
-	ModInt operator*(const ModInt &p)const{return ModInt(*this)*=p;}
-	ModInt operator/(const ModInt &p)const{return ModInt(*this)/=p;}
-	ModInt operator^(long long p)const{return ModInt(*this)^=p;}
-	bool operator==(const ModInt &p)const{return x==p.x;}
-	bool operator!=(const ModInt &p)const{return x!=p.x;}
-	explicit operator int() const { return x; }						   // added by QCFium
-	ModInt operator=(const int p) {x = p; return ModInt(*this);} // added by QCFium
-	ModInt inverse()const{
-		int a=x,b=mod,u=1,v=0,t;
-		while(b>0){
-			t=a/b;
-			a-=t*b;
-			std::swap(a,b);
-			u-=t*v;
-			std::swap(u,v);
-		}
-		return ModInt(u);
-	}
-	friend std::ostream &operator<<(std::ostream &os,const ModInt<mod> &p){
-		return os<<p.x;
-	}
-	friend std::istream &operator>>(std::istream &is,ModInt<mod> &a){
-		long long x;
-		is>>x;
-		a=ModInt<mod>(x);
-		return (is);
-	}
-};
-typedef ModInt<MOD> mint;
-
 
 int main() {
 	INIT;
@@ -158,58 +96,6 @@ OUT(ans)
 
 return 0;
 }
-
-//////////////////////////  数値、Vectorなど配列に適用 ///////////////////////////
-
-//     vector<int> a{1,2,3,4,5};
-//	   vector<int> b(n, -1);  // nは配列大きさ、 -1は初期値
-//     cout << a.size()<< '\n'; //aの大きさ
-//     cout << a[3]<< '\n'; //i番目の要素にアクセス
-//     cout << a.front()<< '\n';  //先頭を参照
-//     cout << a.back()<< '\n';   //末尾を参照
-//     a.push_back(10);  //末尾に要素を追加
-//     a.pop_back();   //末尾の要素を削除
-
-// listに対するfor文　書き方
-// n = {{0,1,2},{3,4,5}}
-// for(int i : n[0]){
-// 	OUT(i)
-// }
-// 出力は 0,1,2 
-
-//"a" を b回繰り返すstringで初期化
-// std::string s(b, "a");  
-
-// 3項演算子
-// (n == m ? cYES : cNO)
-
-// 配列の重複削除に使うset 配列  insertとかで配列を作り変える？
-//  std::set<int> st{3, 1, 4, 1};
-//  set は重複を許さない順序付集合なので、上記のように重複データがある場合は、重複データは自動的に削除され、{1, 3, 4} だけが格納される。
-
-// CHMAX(a,b)  a,bを比較して、でかい方をaに代入する
-
-// 数値型への変換
-//   string s = "1";
-//  int a = s[0]-'0';
-
-// charから数値への変換
-// std::stoi()	int
-// std::stol()	long
-// std::stoll()	long long
-// std::stof()	float
-// std::stod()	double
-// std::stold()	long double
-
-// ２つの変数をスワップ
-// int a = 1;
-// int b = 2;
-// swap(a, b); // a = 2, b = 1 // 戻り値は特になし
-
-// 配列から配列を検索
-// vector<ll> v = { 1, 2, 3, 4, 5 };
-// vector<ll> w = { 3,4 };
-// cout << *search(v.begin(), v.end(), w.begin(), w.end()); // v.begin() + 2
 
 //  配列から 要素を検索
 // vector<int> v = { 1, 2, 3, 4, 5 };

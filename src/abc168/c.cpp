@@ -32,11 +32,6 @@ template<typename First, typename...Rest>void MACRO_OUT(const First first, const
 #define SHOWQUEUE(a) {auto tmp(a);std::cerr << #a << "\t: ";while(!tmp.empty()){std::cerr << tmp.front() << " ";tmp.pop();}std::cerr << "\n";}
 #define SHOWSTACK(a) {auto tmp(a);std::cerr << #a << "\t: ";while(!tmp.empty()){std::cerr << tmp.top() << " ";tmp.pop();}std::cerr << "\n";}
 
-#define cYES cout<<"YES"<<endl
-#define cNO cout<<"NO"<<endl
-#define cYes cout<<"Yes"<<endl
-#define cNo cout<<"No"<<endl
-// utility
 #define ALL(a) (a).begin(),(a).end()
 #define FOR(w, a, n) for(int w=(a);w<(n);++w)
 #define RFOR(w, a, n) for(int w=(n)-1;w>=(a);--w)
@@ -55,13 +50,6 @@ template<class T> inline T CHMIN(T& a, const T b) { return a = (a > b) ? b : a; 
 template<class T> using V = std::vector<T>;
 template<class T> using VV = V<V<T>>;
  
-// template<typename S, typename T>
-// std::ostream& operator<<(std::ostream& os, std::pair<S, T> p) {
-// 	os << "(" << p.first << ", " << p.second << ")"; return os;
-// }
- 
-// type/const
-// #define int ll
 using ll = long long;
 using ull = unsigned long long;
 using ld = long double;
@@ -78,80 +66,6 @@ template<class T, size_t N> void FILL(T(&a)[N], const T & val) { for (auto& x : 
 template<class ARY, size_t N, size_t M, class T> void FILL(ARY(&a)[N][M], const T & val) { for (auto& b : a) FILL(b, val); }
 template<class T> void FILL(std::vector<T> & a, const T & val) { for (auto& x : a) x = val; }
 template<class ARY, class T> void FILL(std::vector<std::vector<ARY>> & a, const T & val) { for (auto& b : a) FILL(b, val); }
-// ------------>8------------------------------------->8------------
-
-template<int mod>
-struct ModInt{
-	int x;
-	ModInt():x(0){}
-	ModInt(long long y):x(y>=0?y%mod:(mod-(-y)%mod)%mod){}
-	ModInt &operator+=(const ModInt &p){
-		if((x+=p.x)>=mod)x-=mod;
-		return *this;
-	}
-	ModInt &operator-=(const ModInt &p){
-		if((x+=mod-p.x)>=mod)x-=mod;
-		return *this;
-	}
-	ModInt &operator*=(const ModInt &p){
-		x=(int)(1LL*x*p.x%mod);
-		return *this;
-	}
-	ModInt &operator/=(const ModInt &p){
-		*this*=p.inverse();
-		return *this;
-	}
-	ModInt &operator^=(long long p){
-		ModInt res = 1;
-		for (; p; p >>= 1) {
-			if (p & 1) res *= *this;
-			*this *= *this;
-		}
-		return *this = res;
-	}
-	ModInt operator-()const{return ModInt(-x);}
-	ModInt operator+(const ModInt &p)const{return ModInt(*this)+=p;}
-	ModInt operator-(const ModInt &p)const{return ModInt(*this)-=p;}
-	ModInt operator*(const ModInt &p)const{return ModInt(*this)*=p;}
-	ModInt operator/(const ModInt &p)const{return ModInt(*this)/=p;}
-	ModInt operator^(long long p)const{return ModInt(*this)^=p;}
-	bool operator==(const ModInt &p)const{return x==p.x;}
-	bool operator!=(const ModInt &p)const{return x!=p.x;}
-	explicit operator int() const { return x; }						   // added by QCFium
-	ModInt operator=(const int p) {x = p; return ModInt(*this);} // added by QCFium
-	ModInt inverse()const{
-		int a=x,b=mod,u=1,v=0,t;
-		while(b>0){
-			t=a/b;
-			a-=t*b;
-			std::swap(a,b);
-			u-=t*v;
-			std::swap(u,v);
-		}
-		return ModInt(u);
-	}
-	friend std::ostream &operator<<(std::ostream &os,const ModInt<mod> &p){
-		return os<<p.x;
-	}
-	friend std::istream &operator>>(std::istream &is,ModInt<mod> &a){
-		long long x;
-		is>>x;
-		a=ModInt<mod>(x);
-		return (is);
-	}
-};
-typedef ModInt<MOD> mint;
-
-mint combination(ull s, ull r) {
-  if ( r * 2 > s ) r = s - r;
-  mint dividend = 1;
-  mint divisor  = 1;
-  for ( ull i = 1; i <= r; ++i ) {
-    dividend *= (s-i+1);
-    divisor  *= i;
-  }
-  return dividend / divisor;
-}
 
 
 int main() {
@@ -160,10 +74,10 @@ int main() {
 VAR(ld,a,b)
 VAR(ld,h,m)
 
-ld alfa = (h + (m /60)) /12 * 2 * PI;
-ld beta = (m /60) * 2 * PI;
+ld alfa = (h + (m /60)) /12 * 2 * PI; // 時針の時間と分に対する角度 ラジアン
+ld beta = (m /60) * 2 * PI;  // 分針の分に対する角度 ラジアン
 
-ld c = sqrt(ld(pow(a,2) + pow(b,2) -2 * a *b * cos(alfa - beta) ) );
+ld c = sqrt(ld(pow(a,2) + pow(b,2) -2 * a *b * cos(alfa - beta) ) );  //余弦定理
 cout << std::setprecision(10) << c << endl;
 
 return 0;

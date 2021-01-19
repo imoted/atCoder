@@ -160,21 +160,9 @@ signed main() {
 VAR(ll,n);
 VEC(ll,a,n -1);
 
-// a.insert(a.begin() , 1);
-
-// sort(a.begin(), a.end());
-
 map<int, int> cnt;
-// map<int, int> sum;
-
-// a.insert(a.begin() , 0);
 
 REP(i,n -1 ) cnt[a[i]]++;
-
-// OUT(cnt[1]) BR
-// FOR(i,1,n) {
-// 	OUT(cnt[a[i] +1]) BR
-// }
 
 FOR(i,1,n+1){
 	OUT(cnt[i]) BR

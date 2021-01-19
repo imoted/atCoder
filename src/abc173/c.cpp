@@ -80,73 +80,29 @@ template<class T> void FILL(std::vector<T> & a, const T & val) { for (auto& x : 
 template<class ARY, class T> void FILL(std::vector<std::vector<ARY>> & a, const T & val) { for (auto& b : a) FILL(b, val); }
 // ------------>8------------------------------------->8------------
 
-template<int mod>
-struct ModInt{
-	int x;
-	ModInt():x(0){}
-	ModInt(long long y):x(y>=0?y%mod:(mod-(-y)%mod)%mod){}
-	ModInt &operator+=(const ModInt &p){
-		if((x+=p.x)>=mod)x-=mod;
-		return *this;
-	}
-	ModInt &operator-=(const ModInt &p){
-		if((x+=mod-p.x)>=mod)x-=mod;
-		return *this;
-	}
-	ModInt &operator*=(const ModInt &p){
-		x=(int)(1LL*x*p.x%mod);
-		return *this;
-	}
-	ModInt &operator/=(const ModInt &p){
-		*this*=p.inverse();
-		return *this;
-	}
-	ModInt &operator^=(long long p){
-		ModInt res = 1;
-		for (; p; p >>= 1) {
-			if (p & 1) res *= *this;
-			*this *= *this;
-		}
-		return *this = res;
-	}
-	ModInt operator-()const{return ModInt(-x);}
-	ModInt operator+(const ModInt &p)const{return ModInt(*this)+=p;}
-	ModInt operator-(const ModInt &p)const{return ModInt(*this)-=p;}
-	ModInt operator*(const ModInt &p)const{return ModInt(*this)*=p;}
-	ModInt operator/(const ModInt &p)const{return ModInt(*this)/=p;}
-	ModInt operator^(long long p)const{return ModInt(*this)^=p;}
-	bool operator==(const ModInt &p)const{return x==p.x;}
-	bool operator!=(const ModInt &p)const{return x!=p.x;}
-	explicit operator int() const { return x; }						   // added by QCFium
-	ModInt operator=(const int p) {x = p; return ModInt(*this);} // added by QCFium
-	ModInt inverse()const{
-		int a=x,b=mod,u=1,v=0,t;
-		while(b>0){
-			t=a/b;
-			a-=t*b;
-			std::swap(a,b);
-			u-=t*v;
-			std::swap(u,v);
-		}
-		return ModInt(u);
-	}
-	friend std::ostream &operator<<(std::ostream &os,const ModInt<mod> &p){
-		return os<<p.x;
-	}
-	friend std::istream &operator>>(std::istream &is,ModInt<mod> &a){
-		long long x;
-		is>>x;
-		a=ModInt<mod>(x);
-		return (is);
-	}
-};
-typedef ModInt<MOD> mint;
 
 
 int main() {
 	INIT;
 
+VAR(int,h,w,k)
+VEC(string,s,h) // stringで横の行を取り込む s[0] s[1] ..で横は取り出せる為
+int ans=0;
+
+REP(is,1<<h){ 				// 1から2のh乗までのfor文 isに行/ isに列　をどれを赤に塗りつぶすのか情報が入っている 
+	REP(js,1<<w){
+		int cnt =0; 		// 黒ますがいくつなのかをカウント
+		REP(i,h)REP(j,w){   // 列、行をすべてスキャン
+			if(is>>i&1)continue;  // 行、列を見て、そのマスが赤色に塗られたかどうか判定　２進数表現したisのi行目が1であるかどうか（赤色行列）の判定
+			if(js>>j&1)continue;  
+			if(s[i][j] == '#') cnt++;  // そして 行、列とも1(赤色)でなく、かつ#(黒色)である数をカウント
+		}
+		if(cnt == k) ans++;  // 黒ます数がkと同じなら
+	}
+}
+OUT(ans)
 return 0;
+
 }
 
 //////////////////////////  数値、Vectorなど配列に適用 ///////////////////////////

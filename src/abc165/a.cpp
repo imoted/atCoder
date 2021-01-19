@@ -158,17 +158,13 @@ signed main() {
 	INIT;
 
 VAR(ll,k,a,b)
-ll flag=0;
 FOR(i,a,b+1){
 	if(i % k ==0){
 		OUT("OK");
-		flag =1;
-		break;
+		return 0;
 	}
 }
-if(flag ==0){
-	OUT("NG")
-}
+OUT("NG")
 
 // VEC(ll,v,n);
 // MAT(ll,c,n,m);

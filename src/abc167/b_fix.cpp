@@ -165,9 +165,8 @@ int ax = min(a,k);
 k -= a;
 if(k >0){
 	k -= b;
-	if(k >0){
+	if(k >0)
 		cx = min(c,k);
-	}
 }
 
 OUT(ax -cx);

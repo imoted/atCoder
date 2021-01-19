@@ -166,28 +166,28 @@ int flag =0;
 int cnt =0;
 int cnt2 =0;
 
-if(2 * n >= k){
+if(2 * n >= k){   // k が 小さなら、k回ループ回して、今の位置を求める
 	REP(i,k){
 		cur_pos = a[cur_pos] -1;
 	}
 }
-else{
-	REP(i,2 * n){
+else{   // kがおおきいならば　
+	REP(i,2 * n){ 
 		cnt2++;	
 		cur_pos = a[cur_pos] -1;
-		if(mp[a[cur_pos]] == 1){
-			flag =1;
+		if(mp[a[cur_pos]] == 1){  // ループが検出できたなら
+			flag =1; 
 		}
-		if(mp[a[cur_pos]] >= 2){
+		if(mp[a[cur_pos]] >= 2){  // ループを２周めしたら、終わり
 			break;
 		}
-		mp[a[cur_pos]]++;
+		mp[a[cur_pos]]++;   
 		if(flag){
-			cnt++;
+			cnt++;  // ループ検出したら、cntをインクリメント
 		}
 	}
-	ll init = (cnt2 +1 - cnt *2 );
-	ll index = (k - init) % cnt;
+	ll init = (cnt2 +1 - cnt *2 );  // 全カウント(cnt2)からループ分のカウント cnt の２倍を差し引く  つまり、ループに入る前までの、期間を算出
+	ll index = (k - init) % cnt;    // ループで割った余りを算出
 	cur_pos =0;
 	REP(i,index + init){
 		cur_pos = a[cur_pos] -1;
@@ -197,8 +197,6 @@ else{
 OUT(cur_pos +1)
 
 
-// VEC(ll,v,n);
-// MAT(ll,c,n,m);
 
 
 return 0;
