@@ -159,52 +159,14 @@ mint combination(ull s, ull r) {
   return dividend / divisor;
 }
 
-// V<ll> runrun(1e5);
 
-// ll dfs(ll ll_s){
-// ll dfs(string s){	// これだと、遅すぎる。たぶん数時間。
-// 	// string s = to_string(ll_s);
-// 	// ll ll_s = stoi(s);
-// 	ll i = s.size();
-// 	if(i == 1){
-// 		return 1;
-// 	}
-// 	else{
-// 		if(s[0] == s[1] -1||s[0] == s[1]||s[0] == s[1] +1) {
-// 			if(dfs(s.substr(1)))
-// 				return 1;
-// 			else
-// 				return 0;			
-// 		}
-// 		else
-// 			return 0;
-// 	}
-// }
-
-
-V<ll> runrun;
 
 signed main() {
 	INIT;
 
 VAR(ll,k);
 
-// FOR(i,1,10) runrun.PB(i);
-// ll j = 10;  // これだと、遅すぎる。たぶん数時間。
-// ll i =0;
-// while (true)
-// {
-// 	if(runrun.size() == 1e5){
-// 		break;
-// 	}
-// 	if(dfs(to_string(j)) ){
-// 		// runrun.PB(j);
-// 		runrun[i] = j;
-// 		i++;
-// 	}
-// 	j++;
-// }
-
+V<ll> runrun;
 queue<ll> que_next;
 string s;
 ll val=0;

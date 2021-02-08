@@ -153,14 +153,11 @@ mint combination(ull s, ull r) {
   return dividend / divisor;
 }
 
-int gcd(int a, int b)
-{
-   if (a%b == 0)
-   {
+int gcd(int a, int b) {
+   if (a%b == 0) {
        return(b);
    }
-   else
-   {
+   else {
        return(gcd(b, a%b));
    }
 }
@@ -174,7 +171,6 @@ ll ans =0;
 map<ll,ll> map;
 k++;
 
-
 FOR(i,1,k){
 	FOR(j,1,k){
 		FOR(m,1,k){
@@ -184,12 +180,7 @@ FOR(i,1,k){
 	}
 }
 
-
 OUT(ans);
-
-// VEC(ll,v,n);
-// MAT(ll,c,n,m);
-
 
  return 0;
 }

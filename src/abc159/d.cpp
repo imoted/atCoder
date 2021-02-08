@@ -161,40 +161,10 @@ mint combination(ull s, ull r) {
 
 
 signed main() {
-	INIT;
+INIT;
 
 VAR(ll,n);
 VEC(ll,a,n);
-
-// V<ll> a_befo_sort = a;
-// sort(a.begin(),a.end());
-
-// map<ll,ll> map_a;
-
-// ll cnt =0;
-// ll count_a;
-// ll pair_sum =0;
-
-// REP(i,n ){
-// 	cnt++;
-// 	if(i == n -1){
-// 		pair_sum += (cnt * (cnt -1) /2 );
-// 		map_a.insert(make_pair(a[i] ,cnt));
-// 	}
-// 	else{
-// 		if(a[i] != a[i+1]){
-// 			// 要素の変化があるなら
-// 			// count_a = count(a.begin(), a.end(),a[i] ); //遅すぎ
-// 			pair_sum += (cnt * (cnt -1) /2 );
-// 			map_a.insert(make_pair(a[i] ,cnt));
-// 			cnt =0;
-// 		}
-// 	}
-// }
-// REP(i,n){
-// 	OUT(pair_sum - ( map_a[a_befo_sort[i]]  -1 ));
-// 	BR;
-// }
 
 
 map<ll, ll> cnt;
@@ -206,7 +176,6 @@ REP(i,n){
 	OUT(ret - ( cnt[a[i]]  -1 ));
 	BR;
 }
-
 
  return 0;
 }
