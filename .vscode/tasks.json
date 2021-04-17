@@ -1,14 +1,34 @@
 {
     "tasks": [
         {
+        //     "type": "shell",
+        //     "label": "cpp build active file",
+        //     "command": "/usr/bin/cpp",
+        //     "args": [
+        //         "-g",
+        //         "${file}",
+        //         "-o",
+        //         "${fileDirname}/${fileBasenameNoExtension}"
+        //     ],
+        //     "options": {
+        //         "cwd": "/usr/bin"
+        //     },
+        //     "problemMatcher": [
+        //         "$gcc"
+        //     ],
+        //     "group": "build"
+        // },
+        {
             "type": "shell",
-            "label": "cpp build active file",
-            "command": "/usr/bin/cpp",
+            "label": "g++ build active file",
+            "command": "/usr/bin/g++",
             "args": [
                 "-g",
                 "${file}",
                 "-o",
                 "${fileDirname}/${fileBasenameNoExtension}"
+                "-I",
+                "${workspaceFolder}/ac-library"
             ],
             "options": {
                 "cwd": "/usr/bin"
@@ -19,23 +39,25 @@
             "group": "build"
         },
         {
-            "type": "shell",
-            "label": "g++ build active file",
-            "command": "/usr/bin/g++",
-            "args": [
-                "-g",
-                "${file}",
-                "-o",
-                "${fileDirname}/${fileBasenameNoExtension}"
-            ],
-            "options": {
-                "cwd": "/usr/bin"
-            },
-            "problemMatcher": [
-                "$gcc"
-            ],
-            "group": "build"
+        "label": "competitiveTestSample",
+        "type": "shell",
+        "command": "cd ${fileDirname} && g++ -O0 -std=c++17 -D_GLIBCXX_DEBUG -I ${workspaceFolder}/ac-library ${fileBasename} && oj t",
+        "presentation": {
+            "reveal": "always",
+            "focus": true,
+            "panel": "shared",
         }
+        },
+        {
+        "label": "competitiveSubmit",
+        "type": "shell",
+        "command": "cd ${fileDirname} && CPLUS_INCLUDE_PATH=~/ac-library python3 ${workspaceFolder}/ac-library/expander.py ${fileBasename} && oj s combined.cpp",
+        "presentation": {
+            "reveal": "always",
+            "focus": true,
+            "panel": "shared",
+        }
+    }
     ],
     "version": "2.0.0"
 }

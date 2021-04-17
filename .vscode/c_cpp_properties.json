@@ -6,8 +6,8 @@
                 "limitSymbolsToIncludedHeaders": true
             },
             "includePath": [
-                "/usr/include/**",
-                "/home/ted/work/atcoder/src/**"
+                "${workspaceFolder}/ac-library/**",
+                "/usr/include/**"
             ],
             "name": "Linux",
             "intelliSenseMode": "gcc-x64",
@@ -18,3 +18,5 @@
     ],
     "version": 4
 }
+
+// /home/ted/work/atcoder/ac-library

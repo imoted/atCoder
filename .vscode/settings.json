@@ -1,8 +1,4 @@
 {
-    "python.autoComplete.extraPaths": [
-        "/home/tadashi/ros/devel/lib/python2.7/dist-packages",
-        "/opt/ros/kinetic/lib/python2.7/dist-packages"
-    ],
     "files.associations": {
         "cctype": "cpp",
         "clocale": "cpp",
@@ -81,6 +77,9 @@
         "cuchar": "cpp",
         "*.cuh": "cpp",
         "*.ipp": "cpp"
+    },
+    "code-runner.executorMap": {
+        "cpp": "cd $dir && g++ -O0 -std=c++17 -Wshadow -Wall -Wno-sign-compare -D_GLIBCXX_DEBUG -include ~/.competitive_local.hpp -I ~/ac-library $fileName && ./a.out",
     },
     "cmake.configureOnOpen": false
 }

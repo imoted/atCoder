@@ -1,7 +1,5 @@
 #include <bits/stdc++.h>
-#include <atcoder/math>
 using namespace std;
-using namespace atcoder;
 
 #define INIT std::ios::sync_with_stdio(false);std::cin.tie(0);
 #define VAR(type, ...)type __VA_ARGS__;MACRO_VAR_Scan(__VA_ARGS__); // __VA_ARGS__可変引数マクロ
@@ -49,6 +47,33 @@ template<class ARY, class T> void FILL(std::vector<std::vector<ARY>> & a, const 
 int main() {
 INIT;
 
+VAR(int,a,b)
+int is_no = 0;
+int ans =0;
+
+for(int i = b; i > 0; i--){
+    int cnt = 1;
+    int ok_cnt =0;
+    while(1){
+        if(i * cnt <= b && i * cnt >= a){
+            ok_cnt++;
+        }
+        else if(i* cnt > b){
+            break;
+        }
+        cnt++;
+        if(ok_cnt >= 2){
+            ans = max(ans, i );
+            is_no = 1;
+            break;
+        }
+    }
+}
+
+if(!is_no)
+    OUT(1)
+else 
+    OUT(ans)
 
 return 0;
 }

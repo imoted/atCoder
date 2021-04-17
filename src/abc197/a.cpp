@@ -50,10 +50,7 @@ INIT;
 VAR(char,s1,s2,s3)
 OUT(s2)
 OUT(s3)
-OUT(s1)
-cout << s2;
-int tmp;
-cin >> tmp;
+OUT(s1) BR
 
 return 0;
 }
