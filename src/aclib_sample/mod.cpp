@@ -11,10 +11,14 @@ int main() {
 
 ///////////////////////////////////////////////基礎テスト
 
-    modint::set_mod(1000);
-    modint y = 10;
-    int z = 1234;
-    cout << (y * z).val();
+    // modint::set_mod(1000);
+    // modint y = 10;
+    // int z = 1234;
+    // cout << (y * z).val();
+
+    modint::set_mod(4);
+    modint y = 5;
+    cout << (y).val();
 
 //////////////////////////////////////////複雑テスト
 

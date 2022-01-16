@@ -1,5 +1,7 @@
 #include <bits/stdc++.h>
+#include <atcoder/all>
 using namespace std;
+using namespace atcoder;
 
 #define INIT std::ios::sync_with_stdio(false);std::cin.tie(0);
 #define VAR(type, ...)type __VA_ARGS__;MACRO_VAR_Scan(__VA_ARGS__); // __VA_ARGS__可変引数マクロ
@@ -42,15 +44,42 @@ template<class ARY, size_t N, size_t M, class T> void FILL(ARY(&a)[N][M], const 
 template<class T> void FILL(std::vector<T> & a, const T & val) { for (auto& x : a) x = val; }   //	使い方 vector<int> a(3);	FILL(a,10);
 template<class ARY, class T> void FILL(std::vector<std::vector<ARY>> & a, const T & val) { for (auto& b : a) FILL(b, val); }  // ２次元配列でもそのまま使える
 
-
+ll c[61][61];
 
 int main() {
 INIT;
 
+VAR(ll,a,b,k)
 
+c[0][0] = 1;
 
+// パスカルの３角形
+REP(i,60){
+    REP(j,i +1){
+        c[i + 1][j] += c[i][j];
+        c[i + 1][j +1] += c[i][j];
+    }
+}
+
+string ans;
+while(a+b > 0){
+    ll x =0; // 先頭をAにした場合何通りあるか？ 
+    if(a >= 1)  // aが１以上じゃないと、おけない。
+        x = c[a + b - 1][a - 1];
+    if (k <= x)
+    {
+        ans += 'a';
+        --a;
+    }
+    else
+    {
+        ans += 'b';
+        --b;
+        k -= x;
+    }
+}
+OUT(ans)
 
 return 0;
 }
-
 

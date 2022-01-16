@@ -171,27 +171,10 @@ int ans=0;
 
 nokori =x;
 
-// auto devide = [&](int d,int num){
-// 	REP(i,num){
-// 		if(x  num){
-// 			// x %= d;
-// 			// if(x % d == 0){
-// 				ans++;
-// 			// }
-// 		}
-// 	}
-// };
-
-// devide(500,a);
-// devide(100,b);
-// devide(50,c);
-
 OUT(dfs(x,a,b,c,0))
 
 OUT(ans);
 
-// VEC(ll,v,n);
-// MAT(ll,c,n,m);
 
 
 return 0;
